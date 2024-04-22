@@ -59,7 +59,7 @@ _data = {
 radius = 38.0132
 
 [node name="Raccoon" type="CharacterBody2D"]
-collision_mask = 4
+collision_mask = 6
 script = ExtResource("1_84olk")
 
 [node name="bullet_container" type="Node2D" parent="."]

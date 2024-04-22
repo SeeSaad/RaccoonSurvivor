@@ -6,12 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2y3a"]
 
 [node name="bullet" type="Area2D"]
+show_behind_parent = true
 top_level = true
+z_index = -1
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_xjxei")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_l14fb")
 
@@ -25,4 +28,5 @@ position = Vector2(-26, 0)
 scale = Vector2(0.2, 0.5)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

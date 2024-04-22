@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd0wqhlh17mjj"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_g72n3"]
+[ext_resource type="Texture2D" uid="uid://dnxfs5k7fg454" path="res://Assets/PP.png" id="2_upwqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bpsdc"]
+radius = 607.021
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_g72n3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.785398
+texture = ExtResource("2_upwqv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-38, -21, -15, -30, 14, -29, 27, -28, 27, 30, 22, 35, -18, 37, -35, 28, -35, 11, -58, -2, -38, -9)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bpsdc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
