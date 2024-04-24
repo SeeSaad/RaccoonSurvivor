@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var health = 5
+
 const turn_speed = 5
 const aim_speed = 20
 const mov_speed = 600
@@ -37,3 +39,11 @@ func rotate_to_target(target, delta, speed):
 	var direction = (target - global_position)
 	var angle_to = transform.x.angle_to(direction)
 	rotate(sign(angle_to) * min(delta * speed, abs(angle_to)))
+
+func take_damage(damage):
+	#if shield activated (do nothing)
+	health -= damage
+	print(health)
+	if health <= 0:
+		queue_free()
+		print("GAME OVER")

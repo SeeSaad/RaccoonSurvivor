@@ -1507,13 +1507,16 @@ position = Vector2(178, 97)
 position = Vector2(2062, 103)
 
 [node name="enemy2" parent="." instance=ExtResource("4_qawke")]
-position = Vector2(1745, 798)
+position = Vector2(1799, 547)
 
 [node name="enemy3" parent="." instance=ExtResource("4_qawke")]
-position = Vector2(690, 1040)
+position = Vector2(1115, 1091)
 
 [node name="enemy4" parent="." instance=ExtResource("4_qawke")]
-position = Vector2(2832, 933)
+position = Vector2(1575, 349)
 
 [node name="enemy5" parent="." instance=ExtResource("4_qawke")]
-position = Vector2(1203, 1125)
+position = Vector2(862, 1290)
+
+[node name="enemy6" parent="." instance=ExtResource("4_qawke")]
+position = Vector2(1683, 886)

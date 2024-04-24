@@ -6,7 +6,6 @@
 
 [sub_resource type="Animation" id="Animation_am1jl"]
 resource_name = "idle"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,23 +67,23 @@ z_index = -1
 
 [node name="animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-root_node = NodePath("../Node2D")
+root_node = NodePath("../corpo")
 libraries = {
 "": SubResource("AnimationLibrary_3lxgs")
 }
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="corpo" type="Node2D" parent="."]
 
-[node name="tail_pivot" type="Marker2D" parent="Node2D"]
+[node name="tail_pivot" type="Marker2D" parent="corpo"]
 position = Vector2(-18, -2)
 
-[node name="tail" type="Sprite2D" parent="Node2D/tail_pivot"]
+[node name="tail" type="Sprite2D" parent="corpo/tail_pivot"]
 position = Vector2(-33, -10)
 rotation = 1.0472
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_471u2")
 
-[node name="body" type="Sprite2D" parent="Node2D"]
+[node name="body" type="Sprite2D" parent="corpo"]
 rotation = 1.0472
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_wbjsg")

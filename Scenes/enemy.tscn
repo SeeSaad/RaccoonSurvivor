@@ -1,29 +1,165 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd0wqhlh17mjj"]
+[gd_scene load_steps=15 format=3 uid="uid://dd0wqhlh17mjj"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_g72n3"]
 [ext_resource type="Texture2D" uid="uid://dnxfs5k7fg454" path="res://Assets/PP.png" id="2_upwqv"]
+[ext_resource type="Shader" path="res://Shader/enemy.gdshader" id="2_vo2gw"]
+[ext_resource type="Texture2D" uid="uid://bnjbj3ooy0m36" path="res://icon.svg" id="3_gegmy"]
+
+[sub_resource type="Animation" id="Animation_nxmow"]
+resource_name = "attack"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1pvwg"]
+resource_local_to_scene = true
+shader = ExtResource("2_vo2gw")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashstate = 0.0
+
+[sub_resource type="Animation" id="Animation_y68bg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Node2D/body:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_1pvwg")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpbaw"]
+_data = {
+"RESET": SubResource("Animation_y68bg"),
+"attack": SubResource("Animation_nxmow")
+}
+
+[sub_resource type="Animation" id="Animation_afhb3"]
+resource_name = "shot"
+length = 0.100003
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.075, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, -0.261799, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/body:material:shader_parameter/flashstate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tgifs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/body:material:shader_parameter/flashstate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4subw"]
+_data = {
+"RESET": SubResource("Animation_tgifs"),
+"shot": SubResource("Animation_afhb3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_isfcx"]
+radius = 38.6394
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bpsdc"]
-radius = 607.021
+radius = 1289.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3do0k"]
+size = Vector2(57, 88)
 
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 7
 script = ExtResource("1_g72n3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -0.785398
+[node name="movement_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../attack_area")
+libraries = {
+"": SubResource("AnimationLibrary_lpbaw")
+}
+
+[node name="flash_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4subw")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = 2.35619
+
+[node name="body" type="Sprite2D" parent="Node2D"]
+material = SubResource("ShaderMaterial_1pvwg")
 texture = ExtResource("2_upwqv")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-38, -21, -15, -30, 14, -29, 27, -28, 27, 30, 22, 35, -18, 37, -35, 28, -35, 11, -58, -2, -38, -9)
+[node name="colision_body" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_isfcx")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="detection_area" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="detection_shape" type="CollisionShape2D" parent="detection_area"]
+visible = false
+rotation = 3.14159
 shape = SubResource("CircleShape2D_bpsdc")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="attack_area" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+visible = false
+position = Vector2(57, -4)
+shape = SubResource("RectangleShape2D_3do0k")
+
+[node name="Sprite2D" type="Sprite2D" parent="attack_area"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(57, -3.99999)
+scale = Vector2(0.4375, 0.671875)
+texture = ExtResource("3_gegmy")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
