@@ -3,9 +3,9 @@ extends CharacterBody2D
 var health = 5.0
 
 const turn_speed = 5
-const mov_speed = 400
 const knockback_recovery = 10
 const enemy_attack_strengh = 1.0
+var mov_speed = 400
 
 var target = null
 var last_pos = null
@@ -34,6 +34,8 @@ func _physics_process(delta):
 		if current_target != null:
 			rotate_to_target(current_target, delta)
 			velocity = (current_target - global_position).normalized() * mov_speed + knockback
+			mov_speed += 1
+			%movement_animation.play("walk")
 		else:
 			velocity = Vector2.ZERO
 	
@@ -85,6 +87,7 @@ func rotate_to_target(target, delta):
 func take_damage(damage, direction, knockback_val):
 	health -= damage
 	knockback = direction * knockback_val
+	mov_speed = 400
 	%flash_animation.play("shot")
 	if health <= 0:
 		queue_free() # die!

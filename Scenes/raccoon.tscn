@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://07nnp2dxa3cp"]
+[gd_scene load_steps=9 format=3 uid="uid://07nnp2dxa3cp"]
 
 [ext_resource type="Script" path="res://Scripts/Raccoon.gd" id="1_84olk"]
-[ext_resource type="Texture2D" uid="uid://p6qb5rrr2pqm" path="res://Assets/Racoon_tail.png" id="2_471u2"]
-[ext_resource type="Texture2D" uid="uid://bv8eyd184okvv" path="res://Assets/Racoon_body.png" id="3_wbjsg"]
+[ext_resource type="Texture2D" uid="uid://p6qb5rrr2pqm" path="res://Assets/Raccoon/Racoon_tail.png" id="2_471u2"]
+[ext_resource type="PackedScene" uid="uid://dspdrqxwbkmc8" path="res://Scenes/pistol.tscn" id="2_ada8y"]
+[ext_resource type="Texture2D" uid="uid://bv8eyd184okvv" path="res://Assets/Raccoon/Racoon_body.png" id="3_wbjsg"]
 
 [sub_resource type="Animation" id="Animation_am1jl"]
 resource_name = "idle"
@@ -65,6 +66,22 @@ script = ExtResource("1_84olk")
 unique_name_in_owner = true
 z_index = -1
 
+[node name="l_arm" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+
+[node name="l_pistol" parent="l_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="r_arm" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+
+[node name="r_pistol" parent="r_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
 [node name="animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("../corpo")
@@ -89,9 +106,5 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_wbjsg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -4)
+position = Vector2(3, -4)
 shape = SubResource("CircleShape2D_37wbr")
-
-[node name="shooting_point" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(54, -2)

@@ -1,15 +1,23 @@
 extends CharacterBody2D
 
-var health = 5
+var health : float = 5.0
 
-const turn_speed = 5
-const aim_speed = 20
-const mov_speed = 600
+const turn_speed : int = 5
+const aim_speed : int = 20
+const mov_speed : int = 600
 
-@onready var bullet = preload("res://Scenes/bullet.tscn")
+var aiming : bool = false
+
+var duas_armas : bool = true
+
+var current_weapon_r = null
+var current_weapon_l = null
+
 #@onready var shield = preload("res://Scenes/bullet.tscn")
-#@onready var gun = preload("res://Scenes/bullet.tscn")
+#@onready var pistol = preload("res://Scenes/pistol.tscn")
 #@onready var rpg = preload("")
+func _ready():
+	pass
 
 func _physics_process(delta):
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -22,23 +30,47 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("Aim"):
 		rotate_to_target(get_global_mouse_position(), delta, aim_speed)
+		rotate_gun(global_position.distance_to(get_global_mouse_position()), delta, aim_speed)
 	elif direction != Vector2.ZERO:
-		%animation.play("walk")
 		rotate_to_target(global_position + direction, delta, turn_speed)
 	if Input.is_action_just_pressed("Shoot"):
 		shoot()
-		
+
+func _input(event):
+	if event.is_action_pressed("pistol"):
+		hide_curr_weapon()
+		current_weapon_r = %r_pistol
+		current_weapon_l = %l_pistol
+		current_weapon_r.visible = true
+		current_weapon_l.visible = true
+	elif event.is_action_pressed("sniper"):
+		hide_curr_weapon()
+		current_weapon_r = null
+		current_weapon_l = null
+
+func hide_curr_weapon():
+	if current_weapon_r != null:
+		current_weapon_r.visible = false
+	if current_weapon_l != null:
+		current_weapon_l.visible = false
+
 func shoot():
-	#call current gun method
-	var new_bullet = bullet.instantiate()
-	new_bullet.global_position = %shooting_point.global_position
-	new_bullet.global_rotation = %shooting_point.global_rotation
-	%bullet_container.add_child(new_bullet)
+	if current_weapon_r != null:
+		current_weapon_r.shoot()
+		current_weapon_l.shoot()
 
 func rotate_to_target(target, delta, speed):
 	var direction = (target - global_position)
 	var angle_to = transform.x.angle_to(direction)
 	rotate(sign(angle_to) * min(delta * speed, abs(angle_to)))
+
+func rotate_gun(target, delta, speed):
+	var angle_to = atan2(target, %r_arm.position.y)
+	var corrected_angle = angle_to - (PI/2)
+	%r_arm.rotation = corrected_angle
+	if duas_armas:
+		corrected_angle = (PI/2) - angle_to
+		%l_arm.rotation = corrected_angle
 
 func take_damage(damage):
 	#if shield activated (do nothing)

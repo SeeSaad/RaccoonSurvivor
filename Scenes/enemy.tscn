@@ -1,9 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://dd0wqhlh17mjj"]
+[gd_scene load_steps=23 format=3 uid="uid://dd0wqhlh17mjj"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_g72n3"]
-[ext_resource type="Texture2D" uid="uid://dnxfs5k7fg454" path="res://Assets/PP.png" id="2_upwqv"]
 [ext_resource type="Shader" path="res://Shader/enemy.gdshader" id="2_vo2gw"]
+[ext_resource type="Texture2D" uid="uid://kb0lch5fmy8d" path="res://Assets/Inimigo/corpo.PNG" id="3_6fl7g"]
 [ext_resource type="Texture2D" uid="uid://bnjbj3ooy0m36" path="res://icon.svg" id="3_gegmy"]
+[ext_resource type="Texture2D" uid="uid://ctdo7wcjsmqwn" path="res://Assets/Inimigo/nariz.PNG" id="4_ghbfv"]
+[ext_resource type="Texture2D" uid="uid://f7ntfhk1dbdn" path="res://Assets/Inimigo/braco.PNG" id="5_sna3o"]
+[ext_resource type="Texture2D" uid="uid://cqet1pacih2n" path="res://Assets/Inimigo/cabeca.PNG" id="6_p87ia"]
+
+[sub_resource type="Animation" id="Animation_y68bg"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_nxmow"]
 resource_name = "attack"
@@ -22,60 +28,57 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1pvwg"]
-resource_local_to_scene = true
-shader = ExtResource("2_vo2gw")
-shader_parameter/color = Vector4(1, 1, 1, 1)
-shader_parameter/flashstate = 0.0
-
-[sub_resource type="Animation" id="Animation_y68bg"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_lpc73"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Node2D/body:material")
+tracks/0/path = NodePath("../sprite/Cabeca:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_1pvwg")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpbaw"]
-_data = {
-"RESET": SubResource("Animation_y68bg"),
-"attack": SubResource("Animation_nxmow")
-}
-
-[sub_resource type="Animation" id="Animation_afhb3"]
-resource_name = "shot"
-length = 0.100003
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/body:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.075, 0.1),
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.261799, -0.261799, 0.0]
+"values": [Vector2(0, 0), Vector2(-1.5, -2.121), Vector2(1.5, 1.5), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/body:material:shader_parameter/flashstate")
+tracks/1/path = NodePath("../sprite/Braco:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.0, 1.0, 0.0]
+"values": [Vector2(3.53553, 0.707123), Vector2(3.53552, 2.12134), Vector2(4.24264, 1.90735e-05), Vector2(3.53552, 2.12134), Vector2(4.24264, 1.90735e-05), Vector2(5.65685, 1.41424), Vector2(3.53552, 2.12134)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../sprite/Nariz:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.85, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.16229e-06, -0.0523599, 0.0, 0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_p28wn"]
+resource_name = "walking"
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpbaw"]
+_data = {
+"RESET": SubResource("Animation_y68bg"),
+"attack": SubResource("Animation_nxmow"),
+"walk": SubResource("Animation_lpc73"),
+"walking": SubResource("Animation_p28wn")
 }
 
 [sub_resource type="Animation" id="Animation_tgifs"]
@@ -83,7 +86,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/body:material:shader_parameter/flashstate")
+tracks/0/path = NodePath("sprite/Corpo:material:shader_parameter/flashstate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,6 +94,95 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite/Nariz:material:shader_parameter/flashstate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/Braco:material:shader_parameter/flashstate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/Cabeca:material:shader_parameter/flashstate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_afhb3"]
+resource_name = "shot"
+length = 0.075
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite/Corpo:material:shader_parameter/flashstate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite/Nariz:material:shader_parameter/flashstate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/Braco:material:shader_parameter/flashstate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/Cabeca:material:shader_parameter/flashstate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4subw"]
@@ -107,6 +199,30 @@ radius = 1289.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3do0k"]
 size = Vector2(57, 88)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0m5oq"]
+resource_local_to_scene = true
+shader = ExtResource("2_vo2gw")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashstate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyn23"]
+resource_local_to_scene = true
+shader = ExtResource("2_vo2gw")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashstate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_di5ht"]
+resource_local_to_scene = true
+shader = ExtResource("2_vo2gw")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashstate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b24li"]
+resource_local_to_scene = true
+shader = ExtResource("2_vo2gw")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashstate = 0.0
 
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -126,22 +242,13 @@ libraries = {
 "": SubResource("AnimationLibrary_4subw")
 }
 
-[node name="Node2D" type="Node2D" parent="."]
-rotation = 2.35619
-
-[node name="body" type="Sprite2D" parent="Node2D"]
-material = SubResource("ShaderMaterial_1pvwg")
-texture = ExtResource("2_upwqv")
-
 [node name="colision_body" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_isfcx")
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="detection_shape" type="CollisionShape2D" parent="detection_area"]
-visible = false
 rotation = 3.14159
 shape = SubResource("CircleShape2D_bpsdc")
 
@@ -158,6 +265,32 @@ self_modulate = Color(1, 1, 1, 0)
 position = Vector2(57, -3.99999)
 scale = Vector2(0.4375, 0.671875)
 texture = ExtResource("3_gegmy")
+
+[node name="sprite" type="Node2D" parent="."]
+rotation = 2.35619
+
+[node name="Corpo" type="Sprite2D" parent="sprite"]
+material = SubResource("ShaderMaterial_0m5oq")
+position = Vector2(-2.82844, 2.82841)
+rotation = -3.14159
+texture = ExtResource("3_6fl7g")
+
+[node name="Nariz" type="Sprite2D" parent="sprite"]
+material = SubResource("ShaderMaterial_uyn23")
+position = Vector2(-1.41421, -6.3777e-06)
+rotation = -0.0135929
+texture = ExtResource("4_ghbfv")
+
+[node name="Braco" type="Sprite2D" parent="sprite"]
+material = SubResource("ShaderMaterial_di5ht")
+position = Vector2(3.74632, 1.48896)
+rotation = -6.28318
+texture = ExtResource("5_sna3o")
+
+[node name="Cabeca" type="Sprite2D" parent="sprite"]
+material = SubResource("ShaderMaterial_b24li")
+position = Vector2(-0.649054, -0.917762)
+texture = ExtResource("6_p87ia")
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_area_2d_body_exited"]
