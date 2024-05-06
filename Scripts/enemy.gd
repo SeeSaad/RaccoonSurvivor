@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health = 5.0
+var health = 50
 
 const turn_speed = 5
 const knockback_recovery = 10
