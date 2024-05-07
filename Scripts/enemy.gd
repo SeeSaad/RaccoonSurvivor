@@ -23,21 +23,15 @@ func _ready():
 	add_child(attack_timer)
 
 func _physics_process(delta):
-	if attacking:
-		velocity = Vector2.ZERO + knockback
+	handle_attack()
+	current_target = get_target()
+	if current_target != null:
+		rotate_to_target(current_target, delta)
+		velocity = (current_target - global_position).normalized() * mov_speed + knockback
+		mov_speed += 1
+		%movement_animation.play("walk")
 	else:
-		if in_attack_range:
-			%movement_animation.play("attack")
-			attacking = true
-			attack_timer.start(0.5)
-		current_target = get_target()
-		if current_target != null:
-			rotate_to_target(current_target, delta)
-			velocity = (current_target - global_position).normalized() * mov_speed + knockback
-			mov_speed += 1
-			%movement_animation.play("walk")
-		else:
-			velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 	
 	handle_knockback()
 	move_and_slide()
@@ -51,7 +45,14 @@ func get_target():
 			return null
 		else:
 			return last_pos
-		
+
+func handle_attack():
+	#if attacking:
+		#velocity = Vector2.ZERO + knockback
+	if in_attack_range && not attacking:
+		%attack_animation.play("attack")
+		attacking = true
+		attack_timer.start(0.5)
 
 func handle_knockback():
 	const threshold = 20
@@ -79,8 +80,8 @@ func handle_knockback():
 		else:
 			knockback.y += knockback_decrement
 
-func rotate_to_target(target, delta):
-	var direction = (target - global_position)
+func rotate_to_target(target_position, delta):
+	var direction = (target_position - global_position)
 	var angle_to = transform.x.angle_to(direction)
 	rotate(sign(angle_to) * min(delta * turn_speed, abs(angle_to)))
 

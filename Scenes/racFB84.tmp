@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://07nnp2dxa3cp"]
+
+[ext_resource type="Script" path="res://Scripts/Raccoon.gd" id="1_84olk"]
+[ext_resource type="Texture2D" uid="uid://p6qb5rrr2pqm" path="res://Assets/Raccoon/Racoon_tail.png" id="2_471u2"]
+[ext_resource type="PackedScene" uid="uid://dspdrqxwbkmc8" path="res://Scenes/pistol.tscn" id="2_ada8y"]
+[ext_resource type="Texture2D" uid="uid://bv8eyd184okvv" path="res://Assets/Raccoon/Racoon_body.png" id="3_wbjsg"]
+
+[sub_resource type="Animation" id="Animation_am1jl"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tail_pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [0.0, -1.0472, 1.0472, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_l0isl"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.10472, -0.10472, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tail_pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.523598, 0.523598, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lxgs"]
+_data = {
+"idle": SubResource("Animation_am1jl"),
+"walk": SubResource("Animation_l0isl")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_37wbr"]
+radius = 38.0132
+
+[node name="Raccoon" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_84olk")
+
+[node name="bullet_container" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+
+[node name="l_arm" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+
+[node name="l_pistol" parent="l_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="r_arm" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+
+[node name="r_pistol" parent="r_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../corpo")
+libraries = {
+"": SubResource("AnimationLibrary_3lxgs")
+}
+
+[node name="corpo" type="Node2D" parent="."]
+
+[node name="tail_pivot" type="Marker2D" parent="corpo"]
+position = Vector2(-18, -2)
+
+[node name="tail" type="Sprite2D" parent="corpo/tail_pivot"]
+position = Vector2(-33, -10)
+rotation = 1.0472
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_471u2")
+
+[node name="body" type="Sprite2D" parent="corpo"]
+rotation = 1.0472
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_wbjsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -4)
+shape = SubResource("CircleShape2D_37wbr")
