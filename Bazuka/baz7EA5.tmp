@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dspdrqxwbkmc8"]
+
+[ext_resource type="Script" path="res://Scripts/pistola.gd" id="1_cgi0d"]
+[ext_resource type="Texture2D" uid="uid://cgfnelwabylv2" path="res://Bazuka/bazuka.png" id="2_te4vn"]
+
+[node name="pistola" type="Node2D"]
+script = ExtResource("1_cgi0d")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(26, 54)
+rotation = 2.31808
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_te4vn")
+centered = false
+offset = Vector2(-49, -30)
+flip_v = true
+
+[node name="shooting_point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(76, 0)
+scale = Vector2(2, 2)
+
+[node name="bullet_container" type="Node2D" parent="."]
+unique_name_in_owner = true
