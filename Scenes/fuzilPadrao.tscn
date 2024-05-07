@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgntrnoeyvtlm"]
+
+[ext_resource type="Script" path="res://Scripts/pistola.gd" id="1_t7kh5"]
+[ext_resource type="Texture2D" uid="uid://54weevy44quj" path="res://Assets/fuzilPadrao_01.png" id="2_4wvio"]
+
+[node name="pistola" type="Node2D"]
+script = ExtResource("1_t7kh5")
+
+[node name="SpriteFuzilPadrao" type="Sprite2D" parent="."]
+position = Vector2(-3, -6.995)
+rotation = 2.35619
+scale = Vector2(2, 2)
+texture = ExtResource("2_4wvio")
+centered = false
+offset = Vector2(-49, -30)
+flip_h = true
+
+[node name="shooting_point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(67, 0)
+scale = Vector2(2, 2)
+
+[node name="bullet_container" type="Node2D" parent="."]
+unique_name_in_owner = true

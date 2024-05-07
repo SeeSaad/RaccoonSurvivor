@@ -15,6 +15,7 @@ var current_weapon_l = null
 
 #@onready var shield = preload("res://Scenes/bullet.tscn")
 #@onready var pistol = preload("res://Scenes/pistol.tscn")
+#@onready var fuzilPadrao = preload("res://Scenes/fuzilPadrao.tscn")
 #@onready var rpg = preload("")
 func _ready():
 	pass
@@ -43,11 +44,18 @@ func _input(event):
 		current_weapon_l = %l_pistol
 		current_weapon_r.visible = true
 		current_weapon_l.visible = true
-	elif event.is_action_pressed("sniper"):
+	elif event.is_action_pressed("fuzilPadrao"):
+		hide_curr_weapon()
+		current_weapon_r = %r_fuzilPadrao
+		current_weapon_l = %l_fuzilPadrao
+		current_weapon_r.visible = true
+		current_weapon_l.visible = true
+		
+	elif event.is_action_pressed("rpg"):
 		hide_curr_weapon()
 		current_weapon_r = null
 		current_weapon_l = null
-
+		
 func hide_curr_weapon():
 	if current_weapon_r != null:
 		current_weapon_r.visible = false
