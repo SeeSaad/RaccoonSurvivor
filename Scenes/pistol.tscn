@@ -1,16 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://dspdrqxwbkmc8"]
 
 [ext_resource type="Script" path="res://Scripts/pistola.gd" id="1_fw5td"]
-[ext_resource type="Texture2D" uid="uid://dmg2jkudcawi" path="res://Assets/arma.png" id="2_r2elh"]
+[ext_resource type="Texture2D" uid="uid://b42hvq6et6pb2" path="res://Assets/sniper.png" id="2_vdoxy"]
 
 [node name="pistola" type="Node2D"]
 script = ExtResource("1_fw5td")
 
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(-3, 1)
+texture_filter = 1
+position = Vector2(-3, -11)
 rotation = 2.35619
-scale = Vector2(2, 2)
-texture = ExtResource("2_r2elh")
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("2_vdoxy")
 centered = false
 offset = Vector2(-49, -30)
 flip_h = true

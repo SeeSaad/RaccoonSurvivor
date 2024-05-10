@@ -59,9 +59,9 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_pressed():
 		if event.is_action("pistol"):
-			equip_weapon(%r_pistol, %l_pistol)
-		elif event.is_action("sniper"):
 			hide_curr_weapon()
+		elif event.is_action("sniper"):
+			equip_weapon(%r_pistol, %l_pistol)
 		elif event.is_action("shoot"):
 			shoot()
 		elif event.is_action("aim"):

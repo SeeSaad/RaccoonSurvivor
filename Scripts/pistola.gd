@@ -3,9 +3,9 @@ extends Node2D
 @onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
 var timeout_timer = Timer.new()
 
-const damage_upgrade = [0.5, 0.7, 0.9]
-const trigger_upgrade = [0.5, 0.3, 0.2]
-const magazine_upgrade = [15, 25, 30]
+const damage_upgrade = [0.9, 1.1, 1.3]
+const trigger_upgrade = [1, 0.8, 0.6]
+const magazine_upgrade = [10, 20, 25]
 const reload_speed : float = 1.5
 
 var upgrade_status : int = 0
