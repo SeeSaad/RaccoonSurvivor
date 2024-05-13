@@ -68,11 +68,10 @@ z_index = -1
 
 [node name="l_arm" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -20)
+position = Vector2(0, -21.145)
 
 [node name="l_pistol" parent="l_arm" instance=ExtResource("2_ada8y")]
 unique_name_in_owner = true
-visible = false
 
 [node name="r_arm" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -80,7 +79,6 @@ position = Vector2(0, 20)
 
 [node name="r_pistol" parent="r_arm" instance=ExtResource("2_ada8y")]
 unique_name_in_owner = true
-visible = false
 
 [node name="animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

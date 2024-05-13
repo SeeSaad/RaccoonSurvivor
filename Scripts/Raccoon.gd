@@ -67,6 +67,8 @@ func _input(event):
 			equip_weapon(%r_pistol, %l_pistol)
 		elif event.is_action("sniper") and weapons_owned[weapon_names.sniper]:
 			hide_curr_weapon()
+		elif event.is_action("sniper"):
+			equip_weapon(%r_pistol, %l_pistol)
 		elif event.is_action("shoot"):
 			shoot()
 		elif event.is_action("aim"):
