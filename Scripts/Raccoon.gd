@@ -1,9 +1,15 @@
 extends CharacterBody2D
 
+var found_UI : bool = false
 var UI
+var found_map : bool = false
+var map
 
 var dash_timer = Timer.new()
 var dash_recovery_timer = Timer.new()
+
+var weapons_owned = [true, false, false]
+enum weapon_names {pistol, sniper, rpg}
 
 var health : float = 5.0
 
@@ -22,9 +28,6 @@ var current_weapon_l = null
 
 var direction : Vector2 = Vector2.ZERO
 
-#@onready var shield = preload("res://Scenes/bullet.tscn")
-#@onready var pistol = preload("res://Scenes/pistol.tscn")
-#@onready var rpg = preload("")
 func _ready():
 	dash_timer.autostart = false
 	dash_timer.timeout.connect(end_dash)
@@ -35,6 +38,8 @@ func _ready():
 	add_child(dash_recovery_timer)
 	
 	UI = get_parent().get_node("UI")
+	if UI != null:
+		found_UI = true
 	refresh_ui()
 
 func _physics_process(delta):
@@ -60,7 +65,7 @@ func _input(event):
 	if event.is_pressed():
 		if event.is_action("pistol"):
 			equip_weapon(%r_pistol, %l_pistol)
-		elif event.is_action("sniper"):
+		elif event.is_action("sniper") and weapons_owned[weapon_names.sniper]:
 			hide_curr_weapon()
 		elif event.is_action("shoot"):
 			shoot()
@@ -68,6 +73,8 @@ func _input(event):
 			aiming = true
 		elif event.is_action("dash") and can_dash:
 			start_dash()
+		elif event.is_action("upgrade"):
+			upgrade_cur_weapon()
 	else:
 		if event.is_action("aim"):
 			aiming = false
@@ -136,16 +143,24 @@ func refresh_ui():
 	refresh_ammo_ui()
 
 func refresh_health_ui():
-	if UI != null:
+	if found_UI:
 		UI.set_health(str(health))
 
 func refresh_dash_ui():
-	if UI != null:
+	if found_UI:
 		if can_dash:
 			UI.set_stamina("11")
 		else:
 			UI.set_stamina("00")
 
 func refresh_ammo_ui():
-	if UI != null and current_weapon_r != null:
+	if found_UI and current_weapon_r != null:
 		UI.set_ammo(str(current_weapon_r.get_ammo()))
+
+# func give_to_ui_weapon_data_for_upgrading
+
+func upgrade_cur_weapon():
+	if current_weapon_r != null:
+		current_weapon_r.upgrade()
+	if current_weapon_l != null:
+		current_weapon_l.upgrade()

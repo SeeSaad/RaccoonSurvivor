@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dd0wqhlh17mjj"]
+[gd_scene load_steps=24 format=3 uid="uid://dd0wqhlh17mjj"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_g72n3"]
 [ext_resource type="Shader" path="res://Themes/Shader/enemy.gdshader" id="2_l8vbj"]
@@ -10,9 +10,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_isfcx"]
 radius = 38.6394
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_bpsdc"]
-radius = 1289.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0m5oq"]
 resource_local_to_scene = true
@@ -104,8 +101,9 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_o72kv"]
-resource_name = "attack"
-length = 0.5
+resource_name = "start_attack"
+length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -113,10 +111,10 @@ tracks/0/path = NodePath("../sprite/Braco:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.44),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0.707104, 0.70711), Vector2(-6.3777e-06, 1.41421), Vector2(0.707104, 0.70711), Vector2(2.12132, -0.707097), Vector2(0.70711, -0.707104), Vector2(3.53555, -3.53552), Vector2(2.82843, -1.4142), Vector2(2.82843, -1.4142), Vector2(2.82842, 1.41423), Vector2(-3.53551, -6.36398)]
+"values": [Vector2(0, 0), Vector2(0.707104, 0.70711), Vector2(-6.3777e-06, 1.41421), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -125,7 +123,7 @@ tracks/1/path = NodePath("../sprite/Braco:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.04, 0.07, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0872665, -0.0872665, 0.0]
@@ -137,7 +135,89 @@ tracks/2/path = NodePath("../sprite/Braco:material:shader_parameter/flashstate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.44, 0.5),
+"times": PackedFloat32Array(0, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.697, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kqong"]
+resource_name = "hold_attack"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../sprite/Braco:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.1, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.707104, 0.70711), Vector2(-6.3777e-06, 1.41421), Vector2(0, 0), Vector2(2.12132, -0.707097), Vector2(0.70711, -0.707104), Vector2(3.53555, -3.53552), Vector2(2.82843, -1.4142), Vector2(2.82843, -1.4142), Vector2(2.82842, 1.41423), Vector2(-3.53551, -6.36398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../sprite/Braco:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.07, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0872665, -0.0872665, 0.0872665, -0.0872665]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../sprite/Braco:material:shader_parameter/flashstate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.697, 0.697]
+}
+
+[sub_resource type="Animation" id="Animation_oslep"]
+resource_name = "attack"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../sprite/Braco:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.707104, 0.70711), Vector2(-6.3777e-06, 1.41421), Vector2(0, 0), Vector2(2.12132, -0.707097), Vector2(0.70711, -0.707104), Vector2(3.53555, -3.53552), Vector2(2.82843, -1.4142), Vector2(2.82843, -1.4142), Vector2(2.82842, 1.41423), Vector2(-3.53551, -6.36398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../sprite/Braco:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.32, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../sprite/Braco:material:shader_parameter/flashstate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.48, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.697, 0.0]
@@ -145,7 +225,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plcve"]
 _data = {
-"attack": SubResource("Animation_o72kv")
+"attack": SubResource("Animation_oslep"),
+"hold_attack": SubResource("Animation_kqong"),
+"start_attack": SubResource("Animation_o72kv")
 }
 
 [sub_resource type="Animation" id="Animation_tgifs"]
@@ -266,13 +348,6 @@ script = ExtResource("1_g72n3")
 [node name="colision_body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_isfcx")
 
-[node name="detection_area" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="detection_shape" type="CollisionShape2D" parent="detection_area"]
-rotation = 3.14159
-shape = SubResource("CircleShape2D_bpsdc")
-
 [node name="sprite" type="Node2D" parent="."]
 rotation = 2.35619
 
@@ -289,7 +364,16 @@ texture = ExtResource("4_ghbfv")
 
 [node name="Braco" type="Sprite2D" parent="sprite"]
 material = SubResource("ShaderMaterial_di5ht")
+position = Vector2(-3.53551, -6.36398)
 texture = ExtResource("5_sna3o")
+
+[node name="shooting_point1" type="Marker2D" parent="sprite/Braco"]
+position = Vector2(-38.8908, -10.6068)
+rotation = -2.35619
+
+[node name="shooting_point2" type="Marker2D" parent="sprite/Braco"]
+position = Vector2(-14.8491, -36.0625)
+rotation = -2.35619
 
 [node name="Cabeca" type="Sprite2D" parent="sprite"]
 material = SubResource("ShaderMaterial_b24li")
@@ -330,7 +414,5 @@ libraries = {
 "": SubResource("AnimationLibrary_4subw")
 }
 
-[connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="detection_area" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]

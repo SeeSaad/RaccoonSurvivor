@@ -3,12 +3,15 @@ extends Node2D
 @onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
 var timeout_timer = Timer.new()
 
+const upgrade_price = [0, 1000, 3000]
+
 const damage_upgrade = [0.5, 0.7, 0.9]
 const trigger_upgrade = [0.5, 0.3, 0.2]
 const magazine_upgrade = [15, 25, 30]
 const reload_speed : float = 1.5
 
 var upgrade_status : int = 0
+var max_upgrade : int = 2
 
 var bullet_damage : float
 var trigger_speed : float
@@ -42,10 +45,11 @@ func shoot():
 			can_shoot = false
 
 func upgrade():
-	upgrade_status += 1
-	bullet_damage = damage_upgrade[0]
-	trigger_speed = trigger_upgrade[0]
-	magazine = magazine_upgrade[0]
+	if (upgrade_status < max_upgrade):
+		upgrade_status += 1
+		bullet_damage = damage_upgrade[upgrade_status]
+		trigger_speed = trigger_upgrade[upgrade_status]
+		magazine = magazine_upgrade[upgrade_status]
 	
 func reload():
 	can_shoot = false

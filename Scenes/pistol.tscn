@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dspdrqxwbkmc8"]
 
 [ext_resource type="Script" path="res://Scripts/pistola.gd" id="1_fw5td"]
-[ext_resource type="Texture2D" uid="uid://dmg2jkudcawi" path="res://Assets/arma.png" id="2_r2elh"]
+[ext_resource type="Texture2D" uid="uid://dmg2jkudcawi" path="res://Assets/Armas/arma.png" id="2_7isrm"]
 
 [node name="pistola" type="Node2D"]
 script = ExtResource("1_fw5td")
@@ -10,7 +10,7 @@ script = ExtResource("1_fw5td")
 position = Vector2(-3, 1)
 rotation = 2.35619
 scale = Vector2(2, 2)
-texture = ExtResource("2_r2elh")
+texture = ExtResource("2_7isrm")
 centered = false
 offset = Vector2(-49, -30)
 flip_h = true

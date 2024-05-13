@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmg2jkudcawi"
-path="res://.godot/imported/arma.png-584f6e084096b0364bcff10e00a830ee.ctex"
+path="res://.godot/imported/arma.png-ce2d45629b08a607e17c6379bab9c11a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/arma.png"
-dest_files=["res://.godot/imported/arma.png-584f6e084096b0364bcff10e00a830ee.ctex"]
+source_file="res://Assets/Armas/arma.png"
+dest_files=["res://.godot/imported/arma.png-ce2d45629b08a607e17c6379bab9c11a.ctex"]
 
 [params]
 

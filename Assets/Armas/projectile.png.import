@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnxfs5k7fg454"
-path="res://.godot/imported/PP.png-a087cb68fce8138f631e5dba92a0f72b.ctex"
+uid="uid://cbbhsak0c8nyu"
+path="res://.godot/imported/projectile.png-3a58d6a7ee41cec8768ff69b20fae5ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PP.png"
-dest_files=["res://.godot/imported/PP.png-a087cb68fce8138f631e5dba92a0f72b.ctex"]
+source_file="res://Assets/Armas/projectile.png"
+dest_files=["res://.godot/imported/projectile.png-3a58d6a7ee41cec8768ff69b20fae5ff.ctex"]
 
 [params]
 

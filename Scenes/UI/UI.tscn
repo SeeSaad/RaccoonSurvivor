@@ -30,21 +30,21 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 columns = 2
 
-[node name="ammo_description" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
-layout_mode = 2
-theme = ExtResource("1_4774r")
-text = "ammo"
-
-[node name="ammo_count" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "00"
-
 [node name="granade_description" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
 layout_mode = 2
 text = "granade"
 
 [node name="granade_count" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00"
+
+[node name="ammo_description" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
+layout_mode = 2
+theme = ExtResource("1_4774r")
+text = "pistol"
+
+[node name="ammo_count" type="Label" parent="ammo_container/MarginContainer/ammo_box"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00"
@@ -63,7 +63,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 20
+theme_override_constants/h_separation = 40
 columns = 2
 
 [node name="health_description" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
