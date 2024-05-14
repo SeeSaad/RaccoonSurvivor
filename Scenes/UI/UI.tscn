@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxeuj45reu4ie"]
+[gd_scene load_steps=4 format=3 uid="uid://bxeuj45reu4ie"]
 
 [ext_resource type="Theme" uid="uid://by7e3d3bcjv7f" path="res://Themes/basic.tres" id="1_4774r"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_nn1yk"]
+[ext_resource type="Theme" uid="uid://dusv3wbxce7u2" path="res://Themes/big_round.tres" id="3_c8jtn"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_nn1yk")
@@ -83,3 +84,15 @@ text = "dash"
 unique_name_in_owner = true
 layout_mode = 2
 text = "00"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.00087
+anchor_bottom = 0.111111
+theme = ExtResource("3_c8jtn")
+metadata/_edit_use_anchors_ = true
+
+[node name="round_count" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"

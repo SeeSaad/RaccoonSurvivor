@@ -11,3 +11,6 @@ func set_health(count):
 
 func set_stamina(count):
 	%stamina_count.text = count
+
+func set_round(count):
+	%round_count.text = count

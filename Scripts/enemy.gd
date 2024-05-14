@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var spawner
+
 var health : float = 5.0
 
 const turn_speed : int = 5
@@ -12,19 +14,21 @@ var max_speed : int = 800
 var speedup_speed : int = 20
 
 var target = null
-var last_pos = null
-var current_target = null
+var current_target
 
 var knockback = Vector2.ZERO
 
-var attacking = false
-var in_attack_range = false
+var died : bool = false
+var attacking : bool = false
+var in_attack_range : bool = false
 var attack_timer = Timer.new()
 
 func _ready():
 	attack_timer.autostart = false
 	attack_timer.timeout.connect(execute_attack)
 	add_child(attack_timer)
+	
+	spawner = get_parent()
 
 func _physics_process(delta):
 	handle_attack()
@@ -48,12 +52,8 @@ func speedup(delta):
 func get_target():
 	if target != null:
 		return target.global_position
-	elif last_pos != null:
-		if (last_pos - global_position).length() < 15:
-			last_pos = null
-			return null
-		else:
-			return last_pos
+	else:
+		return null
 
 func handle_attack():
 	if in_attack_range && not attacking:
@@ -97,7 +97,9 @@ func take_damage(damage, direction, knockback_val):
 	knockback = direction * knockback_val
 	mov_speed = default_speed
 	%flash_animation.play("shot")
-	if health <= 0:
+	if health <= 0 and !died:
+		died = true
+		spawner.enemy_killed()
 		queue_free() # die!
 
 func execute_attack():
@@ -109,6 +111,12 @@ func execute_attack():
 
 func set_target(body):
 	target = body
+
+func set_data(i_health : float, i_walk : int, i_run : int, i_speedup : int):
+	default_speed = i_walk
+	max_speed = i_run
+	speedup_speed = i_speedup
+	health = i_health
 
 func _on_attack_area_body_entered(body):
 	if body.name == "Raccoon":

@@ -1,19 +1,31 @@
 extends Node2D
 
-const special_data = [[], [], [], [], []]
+var UI
 
 var spawners = []
 var finished_spawning = []
 
-enum data_label {spawn_num, spawn_time, spawn_interval, health, attack_speed, walk_speed, run_speed, speedup_speed}
-var data = [3, 1.0, 1.5, 4.0, 0.7, 300, 600, 20]
+enum L {spawn_num, spawn_time, spawn_interval, health, walk_speed, run_speed, speedup_speed}
+var data = [3, 1.0, 1.5, 4.0, 300, 600, 20]
 
 var rodada : int = 1
+
+var round_timer = Timer.new()
+
+@onready var round_count = preload("res://Scenes/round_count.tscn")
 
 func _ready():
 	spawners.append(%enemy_spawner)
 	set_data()
+	initialize_all()
 	start_all()
+	
+	round_timer.autostart = false
+	round_timer.one_shot = true
+	round_timer.timeout.connect(next_round)
+	add_child(round_timer)
+	
+	UI = get_node("UI")
 
 func initialize_all():
 	var id : int = 0
@@ -28,13 +40,42 @@ func start_all():
 
 func set_data():
 	for i in spawners:
-		i.set_enemies_to_spawn(data[data_label.spawn_num])
-		i.set_enemy_minimal_spawn_time(data[data_label.spawn_time])
-		i.set_enemy_spawn_interval(data[data_label.spawn_interval])
-		i.set_enemy_health(data[data_label.health])
+		i.set_enemies_to_spawn(data[L.spawn_num])
+		i.set_enemy_minimal_spawn_time(data[L.spawn_time])
+		i.set_enemy_spawn_interval(data[L.spawn_interval])
+		i.set_enemy_health(data[L.health])
+		i.set_enemy_speed(data[L.walk_speed], data[L.run_speed], data[L.speedup_speed])
 
-func spawner_finished():
+func spawner_finished(id : int):
+	finished_spawning[id] = true
+	
+	for i in finished_spawning:
+		if !i:
+			return
+	
+	round_countdown()
 	# this function is called by the spawner and needs to:
 	# if all spawners have finished:
 	# 	start timer to change round
-	pass
+
+func more_stats():
+	data[L.spawn_num] += 2
+	data[L.spawn_time] -= 0.05
+	data[L.spawn_interval] -= 0.05
+	data[L.health] += 1
+	data[L.walk_speed] += 10
+	data[L.run_speed] += 30
+	data[L.speedup_speed] += 20
+	set_data()
+
+func next_round():
+	UI.set_round(str(rodada))
+	for i in finished_spawning:
+		i = false
+	start_all()
+
+func round_countdown():
+	rodada += 1
+	round_timer.start(10)
+	add_child(round_count.instantiate())
+	more_stats()

@@ -1,8 +1,8 @@
 extends Area2D
 
-const velocity = 1000
-const damage = 0.5
-const knockback = 200
+const velocity : int = 1000
+var damage : float = 0.5
+const knockback : int = 200
 
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
@@ -15,3 +15,6 @@ func _on_body_entered(body): # parede (detecta tilemap)
 	if body.has_method("take_damage"):
 		body.take_damage(damage, transform.x, knockback)
 	queue_free()
+
+func set_damage(num : float):
+	damage = num

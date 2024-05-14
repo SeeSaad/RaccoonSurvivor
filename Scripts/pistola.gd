@@ -35,6 +35,7 @@ func shoot():
 		var new_bullet = bullet.instantiate()
 		new_bullet.global_position = %shooting_point.global_position
 		new_bullet.global_rotation = %shooting_point.global_rotation
+		new_bullet.set_damage(bullet_damage)
 		%bullet_container.add_child(new_bullet)
 
 		bullet_count -= 1
