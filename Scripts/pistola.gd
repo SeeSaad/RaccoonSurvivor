@@ -1,5 +1,7 @@
 extends Node2D
 
+var bullet_container
+
 @onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
 var timeout_timer = Timer.new()
 
@@ -36,7 +38,7 @@ func shoot():
 		new_bullet.global_position = %shooting_point.global_position
 		new_bullet.global_rotation = %shooting_point.global_rotation
 		new_bullet.set_damage(bullet_damage)
-		%bullet_container.add_child(new_bullet)
+		bullet_container.add_child(new_bullet)
 
 		bullet_count -= 1
 		if bullet_count == 0:
@@ -54,12 +56,14 @@ func upgrade():
 	
 func reload():
 	can_shoot = false
+	bullet_count = magazine
 	timeout_timer.start(reload_speed)
 
 func ready_gun():
-	if bullet_count == 0:
-		bullet_count = magazine
 	can_shoot = true
 
 func get_ammo():
 	return bullet_count
+
+func set_bullet_container(node):
+	bullet_container = node

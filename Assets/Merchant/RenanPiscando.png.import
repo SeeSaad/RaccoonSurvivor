@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbbhsak0c8nyu"
-path="res://.godot/imported/projectile.png-3a58d6a7ee41cec8768ff69b20fae5ff.ctex"
+uid="uid://co7ct8clud50r"
+path="res://.godot/imported/RenanPiscando.png-2b6994600a6e3a0d2644972b5926fd6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armas/projectile.png"
-dest_files=["res://.godot/imported/projectile.png-3a58d6a7ee41cec8768ff69b20fae5ff.ctex"]
+source_file="res://Assets/Merchant/RenanPiscando.png"
+dest_files=["res://.godot/imported/RenanPiscando.png-2b6994600a6e3a0d2644972b5926fd6e.ctex"]
 
 [params]
 

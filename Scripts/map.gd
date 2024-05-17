@@ -54,9 +54,6 @@ func spawner_finished(id : int):
 			return
 	
 	round_countdown()
-	# this function is called by the spawner and needs to:
-	# if all spawners have finished:
-	# 	start timer to change round
 
 func more_stats():
 	data[L.spawn_num] += 2

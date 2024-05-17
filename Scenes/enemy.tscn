@@ -414,5 +414,17 @@ libraries = {
 "": SubResource("AnimationLibrary_4subw")
 }
 
+[node name="navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="navigation"]
+unique_name_in_owner = true
+avoidance_enabled = true
+radius = 62.88
+
+[node name="Timer" type="Timer" parent="navigation"]
+wait_time = 0.1
+autostart = true
+
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="navigation/Timer" to="." method="_on_timer_timeout"]

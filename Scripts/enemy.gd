@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-var spawner
+@onready var navigation_agent : NavigationAgent2D = %NavigationAgent2D
+var spawner : Marker2D = null
 
 var health : float = 5.0
 
 const turn_speed : int = 5
-# const knockback_recovery = 10
 const enemy_attack_strengh : float = 1.0
+const knockback_recovery : int = 10
+var knockback_counter : int = 10
 
 var default_speed : int = 400
 var mov_speed : float = 400
@@ -25,24 +27,29 @@ var attack_timer = Timer.new()
 
 func _ready():
 	attack_timer.autostart = false
+	attack_timer.one_shot = true
 	attack_timer.timeout.connect(execute_attack)
 	add_child(attack_timer)
 	
-	spawner = get_parent()
+	if get_parent().has_method("end"):
+		spawner = get_parent()
+	
+	navigation_agent.target_position = target.global_position
 
 func _physics_process(delta):
 	handle_attack()
+	
+	handle_navigation()
 	current_target = get_target()
 	if current_target != null:
 		rotate_to_target(current_target, delta)
-		velocity = (current_target - global_position).normalized() * mov_speed + knockback
 		%movement_animation.play("walk")
 	else:
 		velocity = Vector2.ZERO
 	
 	speedup(delta)
 	
-	handle_knockback()
+	handle_knockback(delta)
 	move_and_slide()
 
 func speedup(delta):
@@ -55,37 +62,48 @@ func get_target():
 	else:
 		return null
 
+func handle_navigation():
+	var direction = (navigation_agent.get_next_path_position() - global_position).normalized()
+	velocity = direction * mov_speed
+
 func handle_attack():
 	if in_attack_range && not attacking:
 		%attack_animation.play("attack")
 		attacking = true
 		attack_timer.start(0.5)
 
-func handle_knockback():
-	const threshold = 20
-	const knockback_decrement = 10
+func handle_knockback(delta):
+	const threshold : int = 20
+	const knockback_decrement : float = 50
+	
+	if knockback_counter > 1 :
+		knockback_counter -= delta
+	if knockback_counter < 1 :
+		knockback_counter = 1
+		
+	var knockback_value : float = knockback_decrement / knockback_counter
 	
 	if knockback.x > 0:
 		if knockback.x < threshold:
 			knockback.x = 0
 		else:
-			knockback.x -= knockback_decrement
+			knockback.x -= knockback_value
 	elif knockback.x < 0:
 		if knockback.x > -threshold:
 			knockback.x = 0
 		else:
-			knockback.x += knockback_decrement
+			knockback.x += knockback_value
 
 	if knockback.y > 0:
 		if knockback.y < threshold:
 			knockback.y = 0
 		else:
-			knockback.y -= knockback_decrement
+			knockback.y -= knockback_value
 	elif knockback.y < 0:
 		if knockback.y > -threshold:
 			knockback.y = 0
 		else:
-			knockback.y += knockback_decrement
+			knockback.y += knockback_value
 
 func rotate_to_target(target_position, delta):
 	var direction = (target_position - global_position)
@@ -96,10 +114,13 @@ func take_damage(damage, direction, knockback_val):
 	health -= damage
 	knockback = direction * knockback_val
 	mov_speed = default_speed
+	knockback_counter = knockback_recovery # reset knockback recovery
 	%flash_animation.play("shot")
+	
 	if health <= 0 and !died:
 		died = true
-		spawner.enemy_killed()
+		if spawner != null:
+			spawner.enemy_killed()
 		queue_free() # die!
 
 func execute_attack():
@@ -125,3 +146,7 @@ func _on_attack_area_body_entered(body):
 func _on_attack_area_body_exited(body):
 	if body.name == "Raccoon":
 		in_attack_range = false
+
+func _on_timer_timeout():
+	if target != null:
+		navigation_agent.target_position = target.global_position

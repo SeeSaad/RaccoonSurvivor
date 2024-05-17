@@ -37,10 +37,14 @@ func _ready():
 	dash_recovery_timer.timeout.connect(end_dash_recovery)
 	add_child(dash_recovery_timer)
 	
-	UI = get_parent().get_node("UI")
-	if UI != null:
-		found_UI = true
+	map = get_parent().get_parent()
+	UI = map.get_node("UI")
+	
+	found_map = map.name == "map"
+	found_UI = UI != null
 	refresh_ui()
+	%l_pistol.set_bullet_container(map)
+	%r_pistol.set_bullet_container(map)
 
 func _physics_process(delta):
 	if dashing:
@@ -75,6 +79,8 @@ func _input(event):
 			start_dash()
 		elif event.is_action("upgrade"):
 			upgrade_cur_weapon()
+		elif event.is_action("reload"):
+			reload_weapon()
 	else:
 		if event.is_action("aim"):
 			aiming = false
@@ -94,6 +100,13 @@ func equip_weapon(r_gun, l_gun):
 	if dual_wield:
 		current_weapon_l = l_gun
 		current_weapon_l.visible = true
+
+func reload_weapon():
+	if current_weapon_r != null:
+		current_weapon_r.reload()
+	if current_weapon_l != null:
+		current_weapon_l.reload()
+	refresh_ammo_ui()
 
 func shoot():
 	if current_weapon_r != null:

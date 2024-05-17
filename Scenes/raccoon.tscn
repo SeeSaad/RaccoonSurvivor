@@ -59,28 +59,13 @@ _data = {
 radius = 38.0132
 
 [node name="Raccoon" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_mask = 6
 script = ExtResource("1_84olk")
 
 [node name="bullet_container" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = -1
-
-[node name="l_arm" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -20)
-
-[node name="l_pistol" parent="l_arm" instance=ExtResource("2_ada8y")]
-unique_name_in_owner = true
-visible = false
-
-[node name="r_arm" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, 20)
-
-[node name="r_pistol" parent="r_arm" instance=ExtResource("2_ada8y")]
-unique_name_in_owner = true
-visible = false
 
 [node name="animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -90,6 +75,22 @@ libraries = {
 }
 
 [node name="corpo" type="Node2D" parent="."]
+
+[node name="l_arm" type="Marker2D" parent="corpo"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+
+[node name="l_pistol" parent="corpo/l_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="r_arm" type="Marker2D" parent="corpo"]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+
+[node name="r_pistol" parent="corpo/r_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
 
 [node name="tail_pivot" type="Marker2D" parent="corpo"]
 position = Vector2(-18, -2)

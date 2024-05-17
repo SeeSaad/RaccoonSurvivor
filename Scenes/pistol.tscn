@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dmg2jkudcawi" path="res://Assets/Armas/arma.png" id="2_7isrm"]
 
 [node name="pistola" type="Node2D"]
+show_behind_parent = true
+z_as_relative = false
 script = ExtResource("1_fw5td")
 
 [node name="sprite" type="Sprite2D" parent="."]

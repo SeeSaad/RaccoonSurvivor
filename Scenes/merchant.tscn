@@ -1,0 +1,202 @@
+[gd_scene load_steps=13 format=3 uid="uid://dgmh5uwwa78ry"]
+
+[ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_3am07"]
+[ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="2_7s55t"]
+[ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="3_uts7a"]
+[ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="4_eawjb"]
+[ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="5_tbdqn"]
+
+[sub_resource type="Animation" id="Animation_3n1v4"]
+resource_name = "fade-in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Node2D/RenanNormal:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Node2D/TimoteoHead:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("renan_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["blink"],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("timoteo_animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["tremble"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nk032"]
+resource_name = "fade-out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb1hg"]
+_data = {
+"fade-in": SubResource("Animation_3n1v4"),
+"fade-out": SubResource("Animation_nk032")
+}
+
+[sub_resource type="Animation" id="Animation_nxv8d"]
+resource_name = "tremble"
+length = 0.1
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D/TimoteoHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.07),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, 1), Vector2(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef158"]
+_data = {
+"tremble": SubResource("Animation_nxv8d")
+}
+
+[sub_resource type="Animation" id="Animation_mnxpx"]
+resource_name = "blink"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D/RenanPiscando:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wkln4"]
+_data = {
+"blink": SubResource("Animation_mnxpx")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_3am07")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(577, 321)
+
+[node name="Merchant" type="Sprite2D" parent="CanvasLayer/Node2D"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_7s55t")
+
+[node name="RenanNormal" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("3_uts7a")
+
+[node name="RenanPiscando" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("4_eawjb")
+
+[node name="TimoteoHead" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("5_tbdqn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_jb1hg")
+}
+
+[node name="timoteo_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ef158")
+}
+
+[node name="renan_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_wkln4")
+}

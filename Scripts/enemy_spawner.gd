@@ -26,7 +26,7 @@ func _ready():
 	spawn_timer.autostart = false
 	spawn_timer.one_shot = true
 	map = get_parent()
-	raccoon = map.get_node("Raccoon")
+	raccoon = map.get_node("TileMap").get_node("Raccoon")
 
 func start():
 	spawn_timer.start(rng.randf_range(enemy_minimal_spawn_time, enemy_minimal_spawn_time + enemy_spawn_interval))
@@ -47,7 +47,6 @@ func end():
 
 func enemy_killed():
 	enemies_killed += 1
-	print(enemies_killed, enemies_to_spawn)
 	
 	if enemies_killed == enemies_to_spawn:
 		enemies_killed = 0
