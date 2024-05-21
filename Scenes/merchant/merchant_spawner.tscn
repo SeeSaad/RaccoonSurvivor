@@ -6,6 +6,7 @@
 size = Vector2(332, 130)
 
 [node name="merchant_spawner" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_joyc7")
 
 [node name="Area2D" type="Area2D" parent="."]

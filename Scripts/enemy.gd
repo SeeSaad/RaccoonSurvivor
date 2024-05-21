@@ -104,6 +104,7 @@ func handle_knockback(delta):
 			knockback.y = 0
 		else:
 			knockback.y += knockback_value
+	velocity += knockback
 
 func rotate_to_target(target_position, delta):
 	var direction = (target_position - global_position)

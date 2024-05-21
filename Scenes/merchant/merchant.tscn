@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgmh5uwwa78ry"]
+[gd_scene load_steps=14 format=3 uid="uid://dgmh5uwwa78ry"]
 
-[ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_3am07"]
-[ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="2_7s55t"]
-[ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="3_uts7a"]
-[ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="4_eawjb"]
-[ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="5_tbdqn"]
+[ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_e1t3p"]
+[ext_resource type="Script" path="res://Scripts/merchant_centralize.gd" id="2_gsgvu"]
+[ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="3_71mdj"]
+[ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="4_tm5pl"]
+[ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="5_w1pgf"]
+[ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="6_xfh71"]
 
 [sub_resource type="Animation" id="Animation_3n1v4"]
 resource_name = "fade-in"
@@ -156,32 +157,136 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_3am07")
+script = ExtResource("1_e1t3p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.848765
+color = Color(0, 0.47451, 0.47451, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.17455
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.17455
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 102.0
+offset_right = 221.0
+offset_bottom = 352.0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "hey"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+text = "hey"
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+text = "hey"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 0
+offset_left = 925.0
+offset_top = 93.0
+offset_right = 1123.0
+offset_bottom = 343.0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "hey"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer2"]
+layout_mode = 2
+text = "hey"
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer3"]
+layout_mode = 2
+text = "hey"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 272.0
+offset_top = 17.0
+offset_right = 472.0
+offset_bottom = 221.0
+scale = Vector2(3.04782, 2.98613)
+color = Color(0, 0.458824, 0.505882, 1)
+
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(577, 321)
+script = ExtResource("2_gsgvu")
 
 [node name="Merchant" type="Sprite2D" parent="CanvasLayer/Node2D"]
 scale = Vector2(4, 4)
-texture = ExtResource("2_7s55t")
+texture = ExtResource("3_71mdj")
 
 [node name="RenanNormal" type="Sprite2D" parent="CanvasLayer/Node2D"]
 self_modulate = Color(1, 1, 1, 0)
 scale = Vector2(4, 4)
-texture = ExtResource("3_uts7a")
+texture = ExtResource("4_tm5pl")
 
 [node name="RenanPiscando" type="Sprite2D" parent="CanvasLayer/Node2D"]
 self_modulate = Color(1, 1, 1, 0)
 scale = Vector2(4, 4)
-texture = ExtResource("4_eawjb")
+texture = ExtResource("5_w1pgf")
 
 [node name="TimoteoHead" type="Sprite2D" parent="CanvasLayer/Node2D"]
 self_modulate = Color(1, 1, 1, 0)
 scale = Vector2(4, 4)
-texture = ExtResource("5_tbdqn")
+texture = ExtResource("6_xfh71")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

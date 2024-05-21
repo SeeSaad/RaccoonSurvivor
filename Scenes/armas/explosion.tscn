@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://c78bynjoyqjfa"]
+
+[ext_resource type="Texture2D" uid="uid://blbcqhi5sxll2" path="res://Assets/Balas/explosion.png" id="1_vrgiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gefps"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xie4u"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxpy3"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf30q"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0a7i"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5spdo"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsdee"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xypf"]
+atlas = ExtResource("1_vrgiy")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpvyg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gefps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xie4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxpy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf30q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0a7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5spdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsdee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xypf")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[node name="explosion" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 0.919789
+sprite_frames = SubResource("SpriteFrames_wpvyg")
+animation = &"explosion"
+frame = 7
+frame_progress = 1.0

@@ -147,7 +147,8 @@ func take_damage(damage):
 	health -= damage
 	refresh_health_ui()
 	if health <= 0:
-		queue_free()
+		%animation.play("die")
+		#set_physics_process(false)
 		print("GAME OVER")
 
 func refresh_ui():
