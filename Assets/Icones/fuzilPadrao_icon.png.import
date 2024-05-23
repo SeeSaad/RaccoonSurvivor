@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br73wifd5to71"
-path="res://.godot/imported/Guax_Death-5.png-408755d03f5eda359f51dfad841a8013.ctex"
+uid="uid://df4yn1r8sbohm"
+path="res://.godot/imported/fuzilPadrao_icon.png-4ad31ff2b59236a8a2e117df7d9ab3bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Raccoon/raccoon_die/Guax_Death-5.png"
-dest_files=["res://.godot/imported/Guax_Death-5.png-408755d03f5eda359f51dfad841a8013.ctex"]
+source_file="res://Assets/Icones/fuzilPadrao_icon.png"
+dest_files=["res://.godot/imported/fuzilPadrao_icon.png-4ad31ff2b59236a8a2e117df7d9ab3bc.ctex"]
 
 [params]
 

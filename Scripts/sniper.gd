@@ -1,16 +1,17 @@
 extends Node2D
 
+var UI : CanvasItem = null
 var bullet_container
 
-@onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
+@onready var bullet = preload("res://Scenes/armas/sniper_bullet.tscn")
 var timeout_timer = Timer.new()
 
-const upgrade_price = [0, 1000, 3000]
+const upgrade_price = [500, 1000, 3000]
 
 const damage_upgrade = [1, 2, 3]
 const trigger_upgrade = [1, 0.7, 0.5]
 const magazine_upgrade = [5, 7, 10]
-const reload_speed : float = 3.5
+const reload_speed : float = 5.5
 
 var upgrade_status : int = 0
 var max_upgrade : int = 2
@@ -67,3 +68,12 @@ func get_ammo():
 
 func set_bullet_container(node):
 	bullet_container = node
+
+func weapon_data():
+	if upgrade_status >= 2:
+		return [2, null]
+	else:
+		return [upgrade_status, upgrade_price[upgrade_status]]
+
+func set_UI(reference):
+	UI = reference

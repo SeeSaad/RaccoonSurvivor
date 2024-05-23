@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jm0ikychiu0l"
-path="res://.godot/imported/Guax_Death-3.png-61713752d2a34c15869b237d6d0378a7.ctex"
+uid="uid://dha0o2jlpucnq"
+path="res://.godot/imported/Icones_Barrra-1.png-cd24ea2c04c90f9746a43b0b63b29efa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Raccoon/raccoon_die/Guax_Death-3.png"
-dest_files=["res://.godot/imported/Guax_Death-3.png-61713752d2a34c15869b237d6d0378a7.ctex"]
+source_file="res://Assets/Icones/Icones_Barrra-1.png"
+dest_files=["res://.godot/imported/Icones_Barrra-1.png-cd24ea2c04c90f9746a43b0b63b29efa.ctex"]
 
 [params]
 

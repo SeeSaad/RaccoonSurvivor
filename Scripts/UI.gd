@@ -14,3 +14,6 @@ func set_stamina(count):
 
 func set_round(count):
 	%round_count.text = count
+
+func set_points(count):
+	%points_count.text = count

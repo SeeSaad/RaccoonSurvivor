@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dls5opyk7javj"
-path="res://.godot/imported/Guax_Death-7.png-370a95446878a84b52b7fcf93920b991.ctex"
+uid="uid://bgrf5ql58gq6n"
+path="res://.godot/imported/raccoon_die_spritesheet.png-ef2423fc4b17fe4df42609306c2879cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Raccoon/raccoon_die/Guax_Death-7.png"
-dest_files=["res://.godot/imported/Guax_Death-7.png-370a95446878a84b52b7fcf93920b991.ctex"]
+source_file="res://Assets/Raccoon/raccoon_die_spritesheet.png"
+dest_files=["res://.godot/imported/raccoon_die_spritesheet.png-ef2423fc4b17fe4df42609306c2879cc.ctex"]
 
 [params]
 

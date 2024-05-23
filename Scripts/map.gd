@@ -12,6 +12,8 @@ var rodada : int = 1
 
 var round_timer = Timer.new()
 
+var points : int = 0
+
 @onready var round_count = preload("res://Scenes/round_count.tscn")
 
 func _ready():
@@ -76,3 +78,11 @@ func round_countdown():
 	round_timer.start(10)
 	add_child(round_count.instantiate())
 	more_stats()
+
+func add_points():
+	points += 100
+	refresh_points() # adds points and refreshes ui
+
+func refresh_points():
+	if UI != null:
+		UI.set_points(str(points))

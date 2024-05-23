@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgmh5uwwa78ry"]
+[gd_scene load_steps=17 format=3 uid="uid://dgmh5uwwa78ry"]
 
 [ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_e1t3p"]
 [ext_resource type="Script" path="res://Scripts/merchant_centralize.gd" id="2_gsgvu"]
+[ext_resource type="Texture2D" uid="uid://df4yn1r8sbohm" path="res://Assets/Icones/fuzilPadrao_icon.png" id="2_k6ppq"]
 [ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="3_71mdj"]
+[ext_resource type="Texture2D" uid="uid://kuo63314bvfv" path="res://Assets/Icones/bazuK_icon.png" id="3_b1lpd"]
+[ext_resource type="Texture2D" uid="uid://dxuocqmash5xu" path="res://Assets/Icones/granada_icon.png" id="4_p6ois"]
 [ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="4_tm5pl"]
 [ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="5_w1pgf"]
 [ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="6_xfh71"]
@@ -191,71 +194,149 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 102.0
-offset_right = 221.0
-offset_bottom = 352.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 19.0
+offset_bottom = 0.000244141
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 650
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer"]
+layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer"]
+[node name="pistol_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "hey"
+text = "COMPRAR"
+horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer2"]
-layout_mode = 2
-text = "hey"
-
-[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer/PanelContainer3"]
+[node name="pistol_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-text = "hey"
+text = "PISTOLA"
+icon = ExtResource("2_k6ppq")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect"]
-layout_mode = 0
-offset_left = 925.0
-offset_top = 93.0
-offset_right = 1123.0
-offset_bottom = 343.0
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="bazooka_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="rpg_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+text = "BAZOOKA
+"
+icon = ExtResource("3_b1lpd")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="sniper_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="sniper_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "SNIPER
+"
+icon = ExtResource("2_k6ppq")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2"]
+layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer"]
+[node name="granade_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "hey"
+text = "COMPRAR"
+horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer2"]
-layout_mode = 2
-text = "hey"
-
-[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/ColorRect/VBoxContainer2/PanelContainer3"]
+[node name="granade_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-text = "hey"
+text = "GRANADA
+"
+icon = ExtResource("4_p6ois")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="extra_life_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="suco_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+text = "SUCO
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="dual_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="dual_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "PAGUE 2 LEVE 1
+"
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 offset_left = 272.0
@@ -305,3 +386,10 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_wkln4")
 }
+
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/pistol_button" to="." method="_on_pistol_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/PanelContainer/rpg_button" to="." method="_on_rpg_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/sniper_button" to="." method="_on_sniper_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PanelContainer/granade_button" to="." method="_on_granade_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3/PanelContainer/suco_button" to="." method="_on_suco_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2/PanelContainer/dual_button" to="." method="_on_dual_button_button_down"]

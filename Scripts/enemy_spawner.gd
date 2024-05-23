@@ -47,6 +47,7 @@ func end():
 
 func enemy_killed():
 	enemies_killed += 1
+	map.add_points()
 	
 	if enemies_killed == enemies_to_spawn:
 		enemies_killed = 0

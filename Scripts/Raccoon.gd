@@ -18,6 +18,8 @@ const aim_speed : int = 20
 const mov_speed : int = 600
 const dash_speed : int = 2000
 
+var dead : bool = false
+
 var aiming : bool = false
 var can_dash : bool = true
 var dashing : bool = false
@@ -45,6 +47,9 @@ func _ready():
 	refresh_ui()
 	%l_pistol.set_bullet_container(map)
 	%r_pistol.set_bullet_container(map)
+	
+	%l_sniper.set_bullet_container(map)
+	%r_sniper.set_bullet_container(map)
 
 func _physics_process(delta):
 	if dashing:
@@ -66,19 +71,17 @@ func _physics_process(delta):
 		rotate_to_target(global_position + direction, delta, turn_speed)
 
 func _input(event):
-	if event.is_pressed():
+	if !dead and event.is_pressed():
 		if event.is_action("pistol"):
 			equip_weapon(%r_pistol, %l_pistol)
 		elif event.is_action("sniper") and weapons_owned[weapon_names.sniper]:
-			hide_curr_weapon()
+			equip_weapon(%l_sniper, %r_sniper)
 		elif event.is_action("shoot"):
 			shoot()
 		elif event.is_action("aim"):
 			aiming = true
 		elif event.is_action("dash") and can_dash:
 			start_dash()
-		elif event.is_action("upgrade"):
-			upgrade_cur_weapon()
 		elif event.is_action("reload"):
 			reload_weapon()
 	else:
@@ -143,13 +146,14 @@ func rotate_gun(target):
 		%l_arm.rotation = corrected_angle
 
 func take_damage(damage):
-	#if shield activated (do nothing)
-	health -= damage
-	refresh_health_ui()
-	if health <= 0:
-		%animation.play("die")
-		#set_physics_process(false)
-		print("GAME OVER")
+	if !dead:
+		health -= damage
+		refresh_health_ui()
+		if health <= 0:
+			dead = true
+			%animation.stop()
+			$die.play("die")
+			print("GAME OVER")
 
 func refresh_ui():
 	refresh_health_ui()
@@ -171,10 +175,24 @@ func refresh_ammo_ui():
 	if found_UI and current_weapon_r != null:
 		UI.set_ammo(str(current_weapon_r.get_ammo()))
 
-# func give_to_ui_weapon_data_for_upgrading
+func get_weapon_data(weapon : int):
+	if weapon == 0:
+		if !weapons_owned[0]:
+			return null
+		return %l_pistol.weapon_data()
+	elif weapon == 1:
+		if !weapons_owned[1]:
+			return null
+		return %l_sniper.weapon_data()
+	elif weapon == 2:
+		if !weapons_owned[2]:
+			return null
+		return null
 
-func upgrade_cur_weapon():
-	if current_weapon_r != null:
-		current_weapon_r.upgrade()
-	if current_weapon_l != null:
-		current_weapon_l.upgrade()
+func upgrade(num : int):
+	if num == 0:
+		%l_pistol.upgrade()
+		%r_pistol.upgrade()
+	if num == 1:
+		%l_sniper.upgrade()
+		%r_sniper.upgrade()

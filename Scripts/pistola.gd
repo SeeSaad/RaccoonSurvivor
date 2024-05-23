@@ -5,7 +5,7 @@ var bullet_container
 @onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
 var timeout_timer = Timer.new()
 
-const upgrade_price = [0, 1000, 3000]
+const upgrade_price = [200, 500, 1000]
 
 const damage_upgrade = [0.5, 0.7, 0.9]
 const trigger_upgrade = [0.5, 0.3, 0.2]
@@ -67,3 +67,9 @@ func get_ammo():
 
 func set_bullet_container(node):
 	bullet_container = node
+
+func weapon_data():
+	if upgrade_status >= 2:
+		return [2, null]
+	else:
+		return [upgrade_status, upgrade_price[upgrade_status]]

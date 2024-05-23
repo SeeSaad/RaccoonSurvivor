@@ -1,18 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://07nnp2dxa3cp"]
+[gd_scene load_steps=14 format=3 uid="uid://07nnp2dxa3cp"]
 
 [ext_resource type="Script" path="res://Scripts/Raccoon.gd" id="1_84olk"]
 [ext_resource type="Texture2D" uid="uid://p6qb5rrr2pqm" path="res://Assets/Raccoon/Racoon_tail.png" id="2_471u2"]
 [ext_resource type="PackedScene" uid="uid://dspdrqxwbkmc8" path="res://Scenes/pistol.tscn" id="2_ada8y"]
+[ext_resource type="PackedScene" uid="uid://d2qwws45ccqhm" path="res://Scenes/armas/sniper.tscn" id="3_56qma"]
 [ext_resource type="Texture2D" uid="uid://bv8eyd184okvv" path="res://Assets/Raccoon/Racoon_body.png" id="3_wbjsg"]
-[ext_resource type="Texture2D" uid="uid://drix88723csth" path="res://Assets/Raccoon/raccoon_die/Guax_Death-1.png" id="5_pbwkw"]
-[ext_resource type="Texture2D" uid="uid://d4ax42p1ycevv" path="res://Assets/Raccoon/raccoon_die/Guax_Death-2.png" id="6_xaswf"]
-[ext_resource type="Texture2D" uid="uid://jm0ikychiu0l" path="res://Assets/Raccoon/raccoon_die/Guax_Death-3.png" id="7_f5r5h"]
-[ext_resource type="Texture2D" uid="uid://co30eq0ts6viv" path="res://Assets/Raccoon/raccoon_die/Guax_Death-4.png" id="8_5krb5"]
-[ext_resource type="Texture2D" uid="uid://br73wifd5to71" path="res://Assets/Raccoon/raccoon_die/Guax_Death-5.png" id="9_x2j2b"]
-[ext_resource type="Texture2D" uid="uid://b2fn335v58ccc" path="res://Assets/Raccoon/raccoon_die/Guax_Death-6.png" id="10_8aniv"]
-[ext_resource type="Texture2D" uid="uid://dls5opyk7javj" path="res://Assets/Raccoon/raccoon_die/Guax_Death-7.png" id="11_60g5g"]
-[ext_resource type="Texture2D" uid="uid://i47i8ac8khni" path="res://Assets/Raccoon/raccoon_die/Guax_Death-8.png" id="12_0l1qk"]
-[ext_resource type="Texture2D" uid="uid://cyucsxk4a6mj8" path="res://Assets/Raccoon/raccoon_die/Guax_Death-9.png" id="13_mxav8"]
+[ext_resource type="Texture2D" uid="uid://bgrf5ql58gq6n" path="res://Assets/Raccoon/raccoon_die_spritesheet.png" id="5_2blum"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_37wbr"]
+radius = 38.0132
 
 [sub_resource type="Animation" id="Animation_am1jl"]
 resource_name = "idle"
@@ -58,13 +54,36 @@ tracks/1/keys = {
 "values": [-0.523598, 0.523598, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_3g5cc"]
-resource_name = "die"
-step = 0.01
+[sub_resource type="Animation" id="Animation_kpo5o"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lxgs"]
+_data = {
+"RESET": SubResource("Animation_kpo5o"),
+"idle": SubResource("Animation_am1jl"),
+"walk": SubResource("Animation_l0isl")
+}
+
+[sub_resource type="Animation" id="Animation_r8ljj"]
+resource_name = "die"
+length = 7.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../corpo:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -76,93 +95,67 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../death_animation/AnimatedSprite2D:visible")
+tracks/1/path = NodePath("../Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.01, 0, 0.01),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../death_animation/AnimatedSprite2D")
+tracks/2/path = NodePath("..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"default", 1.0, false],
-"method": &"play"
+"args": [false],
+"method": &"set_physics_process"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%animation/../Sprite2D:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lxgs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef665"]
 _data = {
-"die": SubResource("Animation_3g5cc"),
-"idle": SubResource("Animation_am1jl"),
-"walk": SubResource("Animation_l0isl")
+"die": SubResource("Animation_r8ljj")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_37wbr"]
-radius = 38.0132
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_e18b7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_pbwkw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_xaswf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_f5r5h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_5krb5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_x2j2b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_8aniv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_60g5g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_0l1qk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_mxav8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
 
 [node name="Raccoon" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_mask = 6
 script = ExtResource("1_84olk")
 
-[node name="bullet_container" type="Node2D" parent="."]
-unique_name_in_owner = true
-z_index = -1
-
-[node name="animation" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-root_node = NodePath("../corpo")
-libraries = {
-"": SubResource("AnimationLibrary_3lxgs")
-}
-
 [node name="corpo" type="Node2D" parent="."]
-modulate = Color(1, 1, 1, 0)
 
 [node name="l_arm" type="Marker2D" parent="corpo"]
 unique_name_in_owner = true
@@ -172,11 +165,20 @@ position = Vector2(0, -20)
 unique_name_in_owner = true
 visible = false
 
+[node name="l_sniper" parent="corpo/l_arm" instance=ExtResource("3_56qma")]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+
 [node name="r_arm" type="Marker2D" parent="corpo"]
 unique_name_in_owner = true
 position = Vector2(0, 20)
 
 [node name="r_pistol" parent="corpo/r_arm" instance=ExtResource("2_ada8y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="r_sniper" parent="corpo/r_arm" instance=ExtResource("3_56qma")]
 unique_name_in_owner = true
 visible = false
 
@@ -198,12 +200,24 @@ texture = ExtResource("3_wbjsg")
 position = Vector2(3, -4)
 shape = SubResource("CircleShape2D_37wbr")
 
-[node name="death_animation" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="death_animation"]
-top_level = true
-position = Vector2(-1, -1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -1
 rotation = 1.0472
 scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_e18b7")
-offset = Vector2(32, -44)
+texture = ExtResource("5_2blum")
+offset = Vector2(32, -43)
+hframes = 9
+
+[node name="animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../corpo")
+libraries = {
+"": SubResource("AnimationLibrary_3lxgs")
+}
+
+[node name="die" type="AnimationPlayer" parent="."]
+root_node = NodePath("../animation")
+libraries = {
+"": SubResource("AnimationLibrary_ef665")
+}
