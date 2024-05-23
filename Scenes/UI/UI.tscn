@@ -58,7 +58,7 @@ text = "pistol"
 [node name="pistol_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/pistol_container/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "00"
+text = "15"
 
 [node name="pistol_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/pistol_container"]
 unique_name_in_owner = true
@@ -78,8 +78,9 @@ theme = ExtResource("1_4774r")
 text = "sniper"
 
 [node name="sniper_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/sniper_container/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "00"
+text = "05"
 
 [node name="sniper_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/sniper_container"]
 unique_name_in_owner = true

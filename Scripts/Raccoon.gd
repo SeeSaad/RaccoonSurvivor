@@ -5,6 +5,8 @@ var UI
 var found_map : bool = false
 var map
 
+var all_weapons = []
+
 var dash_timer = Timer.new()
 var dash_recovery_timer = Timer.new()
 
@@ -45,11 +47,7 @@ func _ready():
 	found_map = map.name == "map"
 	found_UI = UI != null
 	refresh_ui()
-	%l_pistol.set_bullet_container(map)
-	%r_pistol.set_bullet_container(map)
-	
-	%l_sniper.set_bullet_container(map)
-	%r_sniper.set_bullet_container(map)
+	inicialize_weapons()
 
 func _physics_process(delta):
 	if dashing:
@@ -88,6 +86,23 @@ func _input(event):
 		if event.is_action("aim"):
 			aiming = false
 
+func inicialize_weapons():
+	all_weapons.append(%l_pistol)
+	all_weapons.append(%r_pistol)
+	all_weapons.append(%l_sniper)
+	all_weapons.append(%r_sniper)
+	
+	for i in all_weapons:
+		i.set_bullet_container(map)
+		
+	if found_UI:
+		print("found")
+		for i in all_weapons:
+			i.set_UI(UI)
+	else:
+		print("not_found")
+
+
 func hide_curr_weapon():
 	if current_weapon_r != null:
 		current_weapon_r.visible = false
@@ -109,14 +124,12 @@ func reload_weapon():
 		current_weapon_r.reload()
 	if current_weapon_l != null:
 		current_weapon_l.reload()
-	refresh_ammo_ui()
 
 func shoot():
 	if current_weapon_r != null:
 		current_weapon_r.shoot()
 	if current_weapon_l != null:
 		current_weapon_l.shoot()
-	refresh_ammo_ui()
 
 func start_dash():
 	can_dash = false
@@ -158,7 +171,6 @@ func take_damage(damage):
 func refresh_ui():
 	refresh_health_ui()
 	refresh_dash_ui()
-	refresh_ammo_ui()
 
 func refresh_health_ui():
 	if found_UI:
@@ -171,22 +183,18 @@ func refresh_dash_ui():
 		else:
 			UI.set_stamina("00")
 
-func refresh_ammo_ui():
-	if found_UI and current_weapon_r != null:
-		UI.set_ammo(str(current_weapon_r.get_ammo()))
-
 func get_weapon_data(weapon : int):
 	if weapon == 0:
 		if !weapons_owned[0]:
-			return null
+			return [null, null]
 		return %l_pistol.weapon_data()
 	elif weapon == 1:
 		if !weapons_owned[1]:
-			return null
+			return [null, null]
 		return %l_sniper.weapon_data()
 	elif weapon == 2:
 		if !weapons_owned[2]:
-			return null
+			return [null, null]
 		return null
 
 func upgrade(num : int):

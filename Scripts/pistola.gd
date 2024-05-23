@@ -1,5 +1,7 @@
 extends Node2D
 
+var UI : CanvasLayer = null
+
 var bullet_container
 
 @onready var bullet = preload("res://Scenes/pistol_bullet.tscn")
@@ -31,9 +33,15 @@ func _ready():
 	timeout_timer.autostart = false
 	timeout_timer.timeout.connect(ready_gun)
 	add_child(timeout_timer)
+	
+	refresh_bullet_UI()
+
+func _physics_process(delta):
+	pass
 
 func shoot():
 	if can_shoot:
+		
 		var new_bullet = bullet.instantiate()
 		new_bullet.global_position = %shooting_point.global_position
 		new_bullet.global_rotation = %shooting_point.global_rotation
@@ -41,6 +49,7 @@ func shoot():
 		bullet_container.add_child(new_bullet)
 
 		bullet_count -= 1
+		refresh_bullet_UI()
 		if bullet_count == 0:
 			reload()
 		else:
@@ -60,6 +69,7 @@ func reload():
 	timeout_timer.start(reload_speed)
 
 func ready_gun():
+	refresh_bullet_UI()
 	can_shoot = true
 
 func get_ammo():
@@ -73,3 +83,13 @@ func weapon_data():
 		return [2, null]
 	else:
 		return [upgrade_status, upgrade_price[upgrade_status]]
+
+func inicialize_timer_UI():
+	pass
+
+func refresh_bullet_UI():
+	if UI != null:
+		UI.set_pistol_ammo(str(bullet_count))
+
+func set_UI(reference):
+	UI = reference
