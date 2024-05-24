@@ -142,15 +142,17 @@ func rpg_pressed():
 		set_labels()
 
 func granade_pressed():
-	if transaction(100):
-		raccoon.buy_granade()
+	if raccoon != null:
+		if transaction(100):
+			raccoon.buy_granade()
 
 func suco_pressed():
-	if transaction(100):
-		raccoon.buy_suco()
+	if raccoon != null:
+		if transaction(100):
+			raccoon.buy_suco()
 
 func dual_pressed():
-	if !dual_owned and transaction(3000):
+	if raccoon != null and !dual_owned and transaction(3000):
 		dual_owned = true
 		raccoon.buy_dual()
 		new_merchant.dual()
