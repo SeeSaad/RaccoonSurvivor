@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgmh5uwwa78ry"]
+[gd_scene load_steps=19 format=3 uid="uid://dgmh5uwwa78ry"]
 
 [ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_e1t3p"]
+[ext_resource type="Texture2D" uid="uid://yd41xr5oa7m" path="res://Assets/Icones/Pistola.png" id="2_5nnk4"]
 [ext_resource type="Script" path="res://Scripts/merchant_centralize.gd" id="2_gsgvu"]
 [ext_resource type="Texture2D" uid="uid://df4yn1r8sbohm" path="res://Assets/Icones/fuzilPadrao_icon.png" id="2_k6ppq"]
 [ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="3_71mdj"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dxuocqmash5xu" path="res://Assets/Icones/granada_icon.png" id="4_p6ois"]
 [ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="4_tm5pl"]
 [ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="5_w1pgf"]
+[ext_resource type="Texture2D" uid="uid://bcjy0r1xru5cv" path="res://Assets/Icones/Icone suco.png" id="6_kvux0"]
 [ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="6_xfh71"]
 
 [sub_resource type="Animation" id="Animation_3n1v4"]
@@ -233,7 +235,8 @@ layout_mode = 2
 [node name="pistol_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "PISTOLA"
-icon = ExtResource("2_k6ppq")
+icon = ExtResource("2_5nnk4")
+expand_icon = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -289,7 +292,7 @@ layout_mode = 2
 [node name="granade_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "COMPRAR"
+text = "COMPRAR 100"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
@@ -308,7 +311,7 @@ layout_mode = 2
 [node name="extra_life_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "COMPRAR"
+text = "COMPRAR 100"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
@@ -319,6 +322,8 @@ layout_mode = 2
 layout_mode = 2
 text = "SUCO
 "
+icon = ExtResource("6_kvux0")
+expand_icon = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -326,7 +331,7 @@ layout_mode = 2
 [node name="dual_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "COMPRAR"
+text = "COMPRAR 3000"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]

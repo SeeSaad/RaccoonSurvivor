@@ -28,10 +28,11 @@ func _ready():
 		print("mapa nao encontrado")
 
 func _input(event):
-	if merchant_in_screen and event.is_action_pressed("pause"):
+	if merchant_in_screen and event.is_action_pressed("dash"):
 		raccoon = null
 		merchant_in_screen = false
 		new_merchant.exit()
+		pause_controller.merchant_unpause()
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Raccoon":
@@ -41,7 +42,7 @@ func _on_area_2d_body_entered(body):
 		get_not_owned(body)
 		set_labels()
 		add_child(new_merchant)
-		pause_controller.pause()
+		pause_controller.merchant_pause()
 		merchant_in_screen = true
 
 func _on_area_2d_body_exited(body):
@@ -53,6 +54,7 @@ func _on_area_2d_body_exited(body):
 func get_not_owned(body):
 	pistol_data = body.get_weapon_data(0)
 	sniper_data = body.get_weapon_data(1)
+	rpg_data = body.get_weapon_data(2)
 	
 	weapons_owned[0] = body.weapons_owned[0]
 	weapons_owned[1] = body.weapons_owned[1]
@@ -63,6 +65,9 @@ func get_not_owned(body):
 	
 	if sniper_data[0] == 2:
 		weapons_maxed[1] = true
+	
+	if rpg_data[0] == 2:
+		weapons_maxed[2] = true
 
 func set_labels():
 	if !weapons_owned[0]: # pistola
@@ -78,10 +83,17 @@ func set_labels():
 		new_merchant.sniper("MAX", "")
 	else:
 		new_merchant.sniper("UPGRADE", str(sniper_data[1]))
+	
+	if !weapons_owned[2]: # rpg
+		new_merchant.rpg("COMPRAR", "100")
+	elif weapons_maxed[2]:
+		new_merchant.rpg("MAX", "")
+	else:
+		new_merchant.rpg("UPGRADE", str(rpg_data[1]))
 
 func transaction(num : int):
 	if found_map and num > -1:
-		if map.points > num:
+		if map.points >= num:
 			map.points -= num
 			map.refresh_points()
 			return true
@@ -107,7 +119,7 @@ func sniper_pressed():
 		return
 	
 	if !weapons_owned[1] and transaction(500):
-		raccoon.weapons_owned[1] = true
+		raccoon.aquire_weapon(1)
 		get_not_owned(raccoon)
 		set_labels()
 	elif weapons_owned[1] and transaction(sniper_data[1]):
@@ -116,13 +128,29 @@ func sniper_pressed():
 		set_labels()
 
 func rpg_pressed():
-	pass
+	if weapons_maxed[2] or raccoon == null:
+		print("transacao impossivel")
+		return
+	
+	if !weapons_owned[2] and transaction(100):
+		raccoon.aquire_weapon(2)
+		get_not_owned(raccoon)
+		set_labels()
+	elif weapons_owned[2] and transaction(rpg_data[1]):
+		raccoon.upgrade(2)
+		get_not_owned(raccoon)
+		set_labels()
 
 func granade_pressed():
-	pass
+	if transaction(100):
+		raccoon.buy_granade()
 
 func suco_pressed():
-	pass
+	if transaction(100):
+		raccoon.buy_suco()
 
 func dual_pressed():
-	pass
+	if !dual_owned and transaction(3000):
+		dual_owned = true
+		raccoon.buy_dual()
+		new_merchant.dual()

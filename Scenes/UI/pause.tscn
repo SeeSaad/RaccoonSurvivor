@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://3tttpq83qa68"]
+
+[ext_resource type="Theme" uid="uid://dusv3wbxce7u2" path="res://Themes/big_round.tres" id="1_83uue"]
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="1_yhwed"]
+[ext_resource type="Texture2D" uid="uid://c73y5xpt25wnh" path="res://Assets/Pause Menu/QUIT.png" id="2_dfu1c"]
+[ext_resource type="Texture2D" uid="uid://bxavbrcb28cvt" path="res://Assets/Pause Menu/esc.png" id="3_8donc"]
+[ext_resource type="Texture2D" uid="uid://b57a3pqkkyv0k" path="res://Assets/Pause Menu/MOVIMENTAÇÃO.png" id="4_mp61j"]
+[ext_resource type="Texture2D" uid="uid://d0dw2k61skoyf" path="res://Assets/Pause Menu/NUMEROS.png" id="5_64stn"]
+[ext_resource type="Texture2D" uid="uid://dvclm2kxtx3f2" path="res://Assets/Pause Menu/RECARREGAR.png" id="6_7ipv7"]
+[ext_resource type="Texture2D" uid="uid://d0s100x7gtelj" path="res://Assets/Pause Menu/SPACE.png" id="7_4hux5"]
+[ext_resource type="Texture2D" uid="uid://dk3jcblktslsy" path="res://Assets/Pause Menu/ROMB.png" id="8_avdjs"]
+[ext_resource type="Texture2D" uid="uid://dg72edshga0h8" path="res://Assets/Pause Menu/ctrl.png" id="9_jigrq"]
+[ext_resource type="Texture2D" uid="uid://cw3820li2k2y1" path="res://Assets/Pause Menu/L0OMB.png" id="10_qf2hc"]
+
+[node name="pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yhwed")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer2/PanelContainer3"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme = ExtResource("1_83uue")
+icon = ExtResource("2_dfu1c")
+expand_icon = true
+
+[node name="Esc" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(239, 61.75)
+scale = Vector2(0.480263, 0.761261)
+texture = ExtResource("3_8donc")
+
+[node name="Movimentação" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(172, 301)
+scale = Vector2(0.542157, 0.573795)
+texture = ExtResource("4_mp61j")
+
+[node name="Numeros" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(521, 232)
+scale = Vector2(0.532646, 0.629496)
+texture = ExtResource("5_64stn")
+
+[node name="Recarregar" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(549.625, 410.28)
+scale = Vector2(0.552222, 0.511066)
+texture = ExtResource("6_7ipv7")
+
+[node name="Space" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(872, 225)
+scale = Vector2(0.600437, 0.635135)
+texture = ExtResource("7_4hux5")
+
+[node name="Romb" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(191, 478)
+scale = Vector2(0.56508, 0.598689)
+texture = ExtResource("8_avdjs")
+
+[node name="Ctrl" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(873, 324)
+scale = Vector2(0.564208, 0.842342)
+texture = ExtResource("9_jigrq")
+
+[node name="L0omb" type="Sprite2D" parent="CanvasLayer/PanelContainer2"]
+position = Vector2(472, 576)
+scale = Vector2(0.563354, 0.549724)
+texture = ExtResource("10_qf2hc")
+
+[connection signal="button_down" from="CanvasLayer/PanelContainer2/PanelContainer3/Button" to="." method="_on_button_button_down"]

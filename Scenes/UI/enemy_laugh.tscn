@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://36reth55tmf"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_laugh.gd" id="1_niffl"]
+[ext_resource type="Texture2D" uid="uid://cixw2jqswqyva" path="res://Assets/Inimigo/KenzoLaugh/kenzo_spritesheet.png" id="2_xjf1v"]
+[ext_resource type="AudioStream" uid="uid://crf53jy44hmdt" path="res://Assets/audio/Risada Inimigo Combate.mp3" id="3_b73yv"]
+
+[sub_resource type="Animation" id="Animation_vvgwp"]
+resource_name = "kenzo_laugh"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_km3ny"]
+_data = {
+"kenzo_laugh": SubResource("Animation_vvgwp")
+}
+
+[sub_resource type="Animation" id="Animation_f2ro7"]
+resource_name = "modulate_laugh"
+length = 15.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("kenzo:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l8by"]
+_data = {
+"modulate_laugh": SubResource("Animation_f2ro7")
+}
+
+[sub_resource type="GDScript" id="GDScript_f0e46"]
+script/source = "extends Sprite2D
+"
+
+[node name="enemy_laugh" type="CanvasLayer" node_paths=PackedStringArray("kenzo")]
+script = ExtResource("1_niffl")
+kenzo = NodePath("kenzo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../kenzo")
+libraries = {
+"": SubResource("AnimationLibrary_km3ny")
+}
+autoplay = "kenzo_laugh"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1l8by")
+}
+autoplay = "modulate_laugh"
+
+[node name="kenzo" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+texture = ExtResource("2_xjf1v")
+hframes = 2
+script = SubResource("GDScript_f0e46")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_b73yv")
+volume_db = -22.691
+pitch_scale = 1.1

@@ -66,6 +66,8 @@ layout_mode = 2
 show_percentage = false
 
 [node name="sniper_container" type="VBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box/sniper_container"]
@@ -88,6 +90,8 @@ layout_mode = 2
 show_percentage = false
 
 [node name="rpg_container" type="VBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box/rpg_container"]
@@ -100,8 +104,9 @@ theme = ExtResource("1_4774r")
 text = "rpg"
 
 [node name="rpg_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/rpg_container/HBoxContainer4"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "00"
+text = "01"
 
 [node name="rpg_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/rpg_container"]
 unique_name_in_owner = true

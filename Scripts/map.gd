@@ -6,7 +6,7 @@ var spawners = []
 var finished_spawning = []
 
 enum L {spawn_num, spawn_time, spawn_interval, health, walk_speed, run_speed, speedup_speed}
-var data = [3, 1.0, 1.5, 4.0, 300, 600, 20]
+var data = [3, 2.0, 1.5, 4.0, 300, 600, 20]
 
 var rodada : int = 1
 
@@ -58,13 +58,13 @@ func spawner_finished(id : int):
 	round_countdown()
 
 func more_stats():
-	data[L.spawn_num] += 2
+	data[L.spawn_num] += 1
 	data[L.spawn_time] -= 0.05
 	data[L.spawn_interval] -= 0.05
-	data[L.health] += 1
+	data[L.health] += 0.5
 	data[L.walk_speed] += 10
 	data[L.run_speed] += 30
-	data[L.speedup_speed] += 20
+	data[L.speedup_speed] += 10
 	set_data()
 
 func next_round():

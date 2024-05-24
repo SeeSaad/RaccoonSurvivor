@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+@onready var granade = preload("res://Scenes/armas/explosion.tscn")
+@onready var kenzo = preload("res://Scenes/UI/enemy_laugh.tscn").instantiate()
+
+var granade_count = 0
+
 var found_UI : bool = false
 var UI
 var found_map : bool = false
@@ -25,7 +30,7 @@ var dead : bool = false
 var aiming : bool = false
 var can_dash : bool = true
 var dashing : bool = false
-var dual_wield : bool = true
+var dual_wield : bool = false
 
 var current_weapon_r = null
 var current_weapon_l = null
@@ -74,6 +79,8 @@ func _input(event):
 			equip_weapon(%r_pistol, %l_pistol)
 		elif event.is_action("sniper") and weapons_owned[weapon_names.sniper]:
 			equip_weapon(%l_sniper, %r_sniper)
+		elif event.is_action("rpg") and weapons_owned[weapon_names.rpg]:
+			equip_weapon(%l_rpg, %r_rpg)
 		elif event.is_action("shoot"):
 			shoot()
 		elif event.is_action("aim"):
@@ -82,6 +89,8 @@ func _input(event):
 			start_dash()
 		elif event.is_action("reload"):
 			reload_weapon()
+		elif event.is_action("granade"):
+			launch_granade()
 	else:
 		if event.is_action("aim"):
 			aiming = false
@@ -91,16 +100,15 @@ func inicialize_weapons():
 	all_weapons.append(%r_pistol)
 	all_weapons.append(%l_sniper)
 	all_weapons.append(%r_sniper)
+	all_weapons.append(%l_rpg)
+	all_weapons.append(%r_rpg)
 	
 	for i in all_weapons:
 		i.set_bullet_container(map)
 		
 	if found_UI:
-		print("found")
 		for i in all_weapons:
 			i.set_UI(UI)
-	else:
-		print("not_found")
 
 
 func hide_curr_weapon():
@@ -166,7 +174,12 @@ func take_damage(damage):
 			dead = true
 			%animation.stop()
 			$die.play("die")
-			print("GAME OVER")
+			if found_UI:
+				found_UI = false
+				UI.queue_free()
+
+func new_kenzo():
+	map.add_child(kenzo)
 
 func refresh_ui():
 	refresh_health_ui()
@@ -195,7 +208,7 @@ func get_weapon_data(weapon : int):
 	elif weapon == 2:
 		if !weapons_owned[2]:
 			return [null, null]
-		return null
+		return %l_rpg.weapon_data()
 
 func upgrade(num : int):
 	if num == 0:
@@ -204,3 +217,39 @@ func upgrade(num : int):
 	if num == 1:
 		%l_sniper.upgrade()
 		%r_sniper.upgrade()
+	if num == 2:
+		%l_rpg.upgrade()
+		%r_rpg.upgrade()
+
+func aquire_weapon(num : int):
+	if num == 1:
+		weapons_owned[1] = true
+		UI.sniper_visible()
+	if num == 2:
+		weapons_owned[2] = true
+		UI.rpg_visible()
+
+func launch_granade():
+	if granade_count > 0:
+		granade_count -= 1
+		UI.set_granade(str(granade_count))
+		
+		call_deferred("_spawn_explosion")
+
+func _spawn_explosion():
+	var new_explosion = granade.instantiate()
+	new_explosion.global_position = global_position
+	new_explosion.damage = 0.1
+	new_explosion.knockback = 2000
+	map.add_child(new_explosion)
+
+func buy_granade():
+	granade_count += 1
+	UI.set_granade(str(granade_count))
+
+func buy_suco():
+	health += 2
+	refresh_health_ui()
+
+func buy_dual():
+	dual_wield = true

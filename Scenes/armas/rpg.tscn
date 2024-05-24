@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dum5oj4rigryy"]
+
+[ext_resource type="Script" path="res://Scenes/armas/rpg.gd" id="1_dhyi2"]
+[ext_resource type="Texture2D" uid="uid://bynunf872tril" path="res://Assets/Armas/bazooka/rpg_tilesheet.png" id="1_ybnft"]
+
+[node name="rpg" type="Node2D"]
+script = ExtResource("1_dhyi2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.837758
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_ybnft")
+offset = Vector2(13, 13)
+hframes = 3
+
+[node name="shooting_point" type="Marker2D" parent="."]
+unique_name_in_owner = true

@@ -22,6 +22,7 @@ var magazine : int
 var bullet_count : int
 
 var can_shoot : bool = true
+var reloading : bool = false
 
 func _ready():
 	bullet_damage = damage_upgrade[0]
@@ -32,11 +33,10 @@ func _ready():
 	timeout_timer.autostart = false
 	timeout_timer.timeout.connect(ready_gun)
 	add_child(timeout_timer)
-	
-	refresh_bullet_UI()
 
-func _physics_process(delta):
-	pass
+func _physics_process(_delta):
+	if reloading and UI != null:
+		UI.sniper_pb(timeout_timer.time_left)
 
 func shoot():
 	if can_shoot:
@@ -62,6 +62,7 @@ func upgrade():
 		magazine = magazine_upgrade[upgrade_status]
 	
 func reload():
+	reloading = true
 	can_shoot = false
 	bullet_count = magazine
 	timeout_timer.start(reload_speed)
@@ -69,6 +70,7 @@ func reload():
 func ready_gun():
 	refresh_bullet_UI()
 	can_shoot = true
+	reloading = false
 
 func get_ammo():
 	return bullet_count
@@ -83,7 +85,7 @@ func weapon_data():
 		return [upgrade_status, upgrade_price[upgrade_status]]
 
 func inicialize_timer_UI():
-	pass
+	UI.set_sniper_pb(0, reload_speed)
 
 func refresh_bullet_UI():
 	if UI != null:
@@ -91,3 +93,4 @@ func refresh_bullet_UI():
 
 func set_UI(reference):
 	UI = reference
+	inicialize_timer_UI()

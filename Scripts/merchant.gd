@@ -21,14 +21,11 @@ func pistol(action : String, price : String):
 func sniper(action : String, price : String):
 	%sniper_label.text = action + " " + price
 
-func granade(action : String, price : String):
-	%granade_label.text = action + " " + price
+func rpg(action : String, price : String):
+	%bazooka_label.text = action + " " + price
 
-func life(action : String, price : String):
-	%extra_life_label.text = action + " " + price
-
-func dual(action : String, price : String):
-	%dual_label.text = action + " " + price
+func dual():
+	%dual_label.text = "SEM ESTOQUE"
 
 func _on_pistol_button_button_down():
 	if found_father:
