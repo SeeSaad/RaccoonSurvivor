@@ -1,0 +1,400 @@
+[gd_scene load_steps=19 format=3 uid="uid://dgmh5uwwa78ry"]
+
+[ext_resource type="Script" path="res://Scripts/merchant.gd" id="1_e1t3p"]
+[ext_resource type="Texture2D" uid="uid://yd41xr5oa7m" path="res://Assets/Icones/Pistola.png" id="2_5nnk4"]
+[ext_resource type="Script" path="res://Scripts/merchant_centralize.gd" id="2_gsgvu"]
+[ext_resource type="Texture2D" uid="uid://df4yn1r8sbohm" path="res://Assets/Icones/fuzilPadrao_icon.png" id="2_k6ppq"]
+[ext_resource type="Texture2D" uid="uid://cra5gxsg8mygm" path="res://Assets/Merchant/Merchant.png" id="3_71mdj"]
+[ext_resource type="Texture2D" uid="uid://kuo63314bvfv" path="res://Assets/Icones/bazuK_icon.png" id="3_b1lpd"]
+[ext_resource type="Texture2D" uid="uid://dxuocqmash5xu" path="res://Assets/Icones/granada_icon.png" id="4_p6ois"]
+[ext_resource type="Texture2D" uid="uid://1ld1jidasfde" path="res://Assets/Merchant/RenanNormal.png" id="4_tm5pl"]
+[ext_resource type="Texture2D" uid="uid://co7ct8clud50r" path="res://Assets/Merchant/RenanPiscando.png" id="5_w1pgf"]
+[ext_resource type="Texture2D" uid="uid://bcjy0r1xru5cv" path="res://Assets/Icones/Icone suco.png" id="6_kvux0"]
+[ext_resource type="Texture2D" uid="uid://dou200ydsa2hs" path="res://Assets/Merchant/TimoteoHead.png" id="6_xfh71"]
+
+[sub_resource type="Animation" id="Animation_3n1v4"]
+resource_name = "fade-in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Node2D/RenanNormal:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Node2D/TimoteoHead:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("renan_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["blink"],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("timoteo_animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["tremble"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nk032"]
+resource_name = "fade-out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb1hg"]
+_data = {
+"fade-in": SubResource("Animation_3n1v4"),
+"fade-out": SubResource("Animation_nk032")
+}
+
+[sub_resource type="Animation" id="Animation_nxv8d"]
+resource_name = "tremble"
+length = 0.1
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D/TimoteoHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.07),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, 1), Vector2(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef158"]
+_data = {
+"tremble": SubResource("Animation_nxv8d")
+}
+
+[sub_resource type="Animation" id="Animation_mnxpx"]
+resource_name = "blink"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Node2D/RenanPiscando:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wkln4"]
+_data = {
+"blink": SubResource("Animation_mnxpx")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_e1t3p")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.848765
+color = Color(0, 0.47451, 0.47451, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.17455
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.17455
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 19.0
+offset_bottom = 0.000244141
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 650
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="pistol_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="pistol_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "PISTOLA"
+icon = ExtResource("2_5nnk4")
+expand_icon = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="bazooka_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="rpg_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+text = "BAZOOKA
+"
+icon = ExtResource("3_b1lpd")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="sniper_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="sniper_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "SNIPER
+"
+icon = ExtResource("2_k6ppq")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="granade_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR 100"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="granade_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "GRANADA
+"
+icon = ExtResource("4_p6ois")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="extra_life_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR 100"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="suco_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3/PanelContainer"]
+layout_mode = 2
+text = "SUCO
+"
+icon = ExtResource("6_kvux0")
+expand_icon = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="dual_label" type="Label" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COMPRAR 3000"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="dual_button" type="Button" parent="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "PAGUE 2 LEVE 1
+"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 272.0
+offset_top = 17.0
+offset_right = 472.0
+offset_bottom = 221.0
+scale = Vector2(3.04782, 2.98613)
+color = Color(0, 0.458824, 0.505882, 1)
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+position = Vector2(577, 321)
+script = ExtResource("2_gsgvu")
+
+[node name="Merchant" type="Sprite2D" parent="CanvasLayer/Node2D"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_71mdj")
+
+[node name="RenanNormal" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("4_tm5pl")
+
+[node name="RenanPiscando" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("5_w1pgf")
+
+[node name="TimoteoHead" type="Sprite2D" parent="CanvasLayer/Node2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("6_xfh71")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_jb1hg")
+}
+
+[node name="timoteo_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ef158")
+}
+
+[node name="renan_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_wkln4")
+}
+
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/pistol_button" to="." method="_on_pistol_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/PanelContainer/rpg_button" to="." method="_on_rpg_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/sniper_button" to="." method="_on_sniper_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PanelContainer/granade_button" to="." method="_on_granade_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer3/PanelContainer/suco_button" to="." method="_on_suco_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/ColorRect/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer2/PanelContainer/dual_button" to="." method="_on_dual_button_button_down"]

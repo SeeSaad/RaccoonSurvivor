@@ -1,0 +1,189 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxeuj45reu4ie"]
+
+[ext_resource type="Theme" uid="uid://by7e3d3bcjv7f" path="res://Themes/basic.tres" id="1_4774r"]
+[ext_resource type="Script" path="res://Scripts/UI.gd" id="1_nn1yk"]
+[ext_resource type="Theme" uid="uid://dusv3wbxce7u2" path="res://Themes/big_round.tres" id="3_c8jtn"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_nn1yk")
+
+[node name="ammo_container" type="PanelContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 153.0
+grow_vertical = 0
+size_flags_vertical = 8
+theme = ExtResource("1_4774r")
+
+[node name="MarginContainer" type="MarginContainer" parent="ammo_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ammo_box" type="GridContainer" parent="ammo_container/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="granade_description" type="Label" parent="ammo_container/MarginContainer/ammo_box/HBoxContainer"]
+layout_mode = 2
+text = "granade"
+
+[node name="granade_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00"
+
+[node name="pistol_container" type="VBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box/pistol_container"]
+layout_mode = 2
+theme_override_constants/separation = 47
+
+[node name="pistol_label" type="Label" parent="ammo_container/MarginContainer/ammo_box/pistol_container/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_4774r")
+text = "pistol"
+
+[node name="pistol_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/pistol_container/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "15"
+
+[node name="pistol_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/pistol_container"]
+unique_name_in_owner = true
+layout_mode = 2
+show_percentage = false
+
+[node name="sniper_container" type="VBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box/sniper_container"]
+layout_mode = 2
+theme_override_constants/separation = 39
+
+[node name="sniper_label" type="Label" parent="ammo_container/MarginContainer/ammo_box/sniper_container/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_4774r")
+text = "sniper"
+
+[node name="sniper_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/sniper_container/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "05"
+
+[node name="sniper_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/sniper_container"]
+unique_name_in_owner = true
+layout_mode = 2
+show_percentage = false
+
+[node name="rpg_container" type="VBoxContainer" parent="ammo_container/MarginContainer/ammo_box"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ammo_container/MarginContainer/ammo_box/rpg_container"]
+layout_mode = 2
+theme_override_constants/separation = 68
+
+[node name="rpg_label" type="Label" parent="ammo_container/MarginContainer/ammo_box/rpg_container/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("1_4774r")
+text = "rpg"
+
+[node name="rpg_count" type="Label" parent="ammo_container/MarginContainer/ammo_box/rpg_container/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "01"
+
+[node name="rpg_progress" type="ProgressBar" parent="ammo_container/MarginContainer/ammo_box/rpg_container"]
+unique_name_in_owner = true
+layout_mode = 2
+show_percentage = false
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_4774r")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+columns = 2
+
+[node name="health_description" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "health"
+
+[node name="health_count" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00"
+
+[node name="stamina_description" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "dash"
+
+[node name="stamina_count" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.00087
+anchor_bottom = 0.0709877
+theme = ExtResource("3_c8jtn")
+metadata/_edit_use_anchors_ = true
+
+[node name="round_count" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -74.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+
+[node name="points_label" type="Label" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_4774r")
+text = "points"
+horizontal_alignment = 1
+
+[node name="points_count" type="Label" parent="PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_c8jtn")
+text = "0
+"
+horizontal_alignment = 1

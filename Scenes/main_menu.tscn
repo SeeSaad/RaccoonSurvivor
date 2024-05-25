@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf6xmqs56cnj0"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_i6ce5"]
+[ext_resource type="Texture2D" uid="uid://2x1nr41njtwd" path="res://Assets/Main Menu/Tela inicial.png" id="2_4x18u"]
+[ext_resource type="Texture2D" uid="uid://bcf1jmo0edpou" path="res://Assets/Main Menu/LOGO 01 Artboard 1.png" id="3_qdyt8"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i6ce5")
+
+[node name="PlanoFundo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4x18u")
+
+[node name="ContainerMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 424.0
+offset_bottom = 480.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="LogoMarginContainer" type="MarginContainer" parent="ContainerMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="Logo" type="TextureRect" parent="ContainerMenu/LogoMarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_qdyt8")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="BotoesMarginContainer" type="MarginContainer" parent="ContainerMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="ContainerBotoes" type="VBoxContainer" parent="ContainerMenu/BotoesMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Iniciar" type="Button" parent="ContainerMenu/BotoesMarginContainer/ContainerBotoes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Jogar"
+
+[node name="Sair" type="Button" parent="ContainerMenu/BotoesMarginContainer/ContainerBotoes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Sair"
+
+[node name="InfoMarginContainer" type="MarginContainer" parent="ContainerMenu"]
+layout_mode = 2
+
+[connection signal="pressed" from="ContainerMenu/BotoesMarginContainer/ContainerBotoes/Iniciar" to="." method="_on_iniciar_pressed"]
+[connection signal="pressed" from="ContainerMenu/BotoesMarginContainer/ContainerBotoes/Sair" to="." method="_on_sair_pressed"]

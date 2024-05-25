@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2qwws45ccqhm"]
+
+[ext_resource type="Texture2D" uid="uid://cpobbwk6xym4m" path="res://Assets/Armas/sniper/sniper.png" id="1_kqkpd"]
+[ext_resource type="Script" path="res://Scripts/sniper.gd" id="1_m6rgu"]
+
+[node name="sniper" type="Node2D"]
+scale = Vector2(3, 2)
+script = ExtResource("1_m6rgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.785398
+texture = ExtResource("1_kqkpd")
+centered = false
+offset = Vector2(-46, -73)
+flip_v = true
+
+[node name="shooting_point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(40, 0)

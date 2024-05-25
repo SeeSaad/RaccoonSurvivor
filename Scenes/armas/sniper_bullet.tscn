@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo664hhjtdeqt"]
+
+[ext_resource type="Script" path="res://Scripts/sniper_bullet.gd" id="1_1i7em"]
+[ext_resource type="Texture2D" uid="uid://cbbhsak0c8nyu" path="res://Assets/Balas/projectile.png" id="2_djfg3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0n7e"]
+
+[node name="sniper_bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_1i7em")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r0n7e")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-73, -1)
+
+[node name="Projectile" type="Sprite2D" parent="."]
+position = Vector2(-16, 0)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_djfg3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

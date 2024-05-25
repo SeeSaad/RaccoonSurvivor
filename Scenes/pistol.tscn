@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dspdrqxwbkmc8"]
+
+[ext_resource type="Script" path="res://Scripts/pistola.gd" id="1_fw5td"]
+[ext_resource type="Texture2D" uid="uid://dmg2jkudcawi" path="res://Assets/Armas/arma.png" id="2_7isrm"]
+
+[node name="pistola" type="Node2D"]
+show_behind_parent = true
+z_as_relative = false
+script = ExtResource("1_fw5td")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(-3, 1)
+rotation = 2.35619
+scale = Vector2(2, 2)
+texture = ExtResource("2_7isrm")
+centered = false
+offset = Vector2(-49, -30)
+flip_h = true
+
+[node name="shooting_point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(76, 0)
+scale = Vector2(2, 2)
